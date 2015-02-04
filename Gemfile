@@ -9,6 +9,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'sass', '3.2.19'
 gem 'bower-rails'
 gem "foreman"
+gem 'nokogiri'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
@@ -17,7 +18,10 @@ group :test, :development do
   gem "database_cleaner"
   gem "selenium-webdriver"
   gem 'spring'
-  gem 'sqlite3'
+  gem 'sqlite3'  
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
 end
 
 
