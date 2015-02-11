@@ -3,7 +3,7 @@
 
     <div class="col-md-3 listing" ng-repeat="listing in listings">
       <div class="panel panel-default">
-        <img ng-show="listing.avatar_file_name != null" src="/system/listings/avatars/000/000/00{{listing.id}}/medium/{{listing.avatar_file_name}}" class="thumbnail"/>
+        <img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/medium/{{listing.avatar_file_name}}" class="thumbnail"/>
         <img ng-show="listing.avatar_file_name == null" src="assets/no_image_available.gif" class="thumbnail"/>
         <section>
           <p class="price">
