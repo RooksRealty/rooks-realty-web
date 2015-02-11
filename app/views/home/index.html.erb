@@ -1,22 +1,30 @@
-<div class="container">
-  <div class="row">
+<div class="container" ng-app="rooksRealty">
+  <div class="row" ng-controller='HomeController'>
 
-    <!-- <div class="col-md-3">
-      <div class="listing panel panel-default">
-        <img src="something.jpg" class="thumbnail"/>
-        <p class="address">
-          3608 Widow Creek Drive, Huntsville, AL 35806
-        </p>
-        <p class="price">
-          $100,000
-        </p>
+    <div class="col-md-3 listing" ng-repeat="listing in listings">
+      <div class="panel panel-default">
+        <img ng-show="listing.avatar_file_name != null" src="/system/listings/avatars/000/000/00{{listing.id}}/medium/{{listing.avatar_file_name}}" class="thumbnail"/>
+        <img ng-show="listing.avatar_file_name == null" src="assets/no_image_available.gif" class="thumbnail"/>
+        <section>
+          <p class="price">
+            {{listing.price | currency:"$":0 }}
+          </p>
+          <p class="address">
+            {{listing.address}}<br>
+            {{listing.city}}, {{listing.state}} {{listing.zipcode}}
+          </p>
+          <p class="realtor">
+            Realtor: {{listing.realtor.name}}
+          </p>
+        </section>
         <div class="panel-footer">
-          3 <i class="fa fa-bed"></i>
-          2 <%= image_tag 'shower.png' %>
-          2,000 SQFT
+          {{listing.bedrooms}} <i class="fa fa-bed"></i>
+          | {{listing.bathrooms}} <%= image_tag 'shower.png' %>
+          | {{listing.sqft | number}} Sq Ft
+          <span ng-show="listing.acres">| {{listing.acres | number}} Acres</span>
         </div>
       </div>
-    </div> -->
+    </div>
 
   </div>
 </div>

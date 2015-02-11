@@ -1,0 +1,22 @@
+.listing {
+	.panel {
+
+		.thumbnail {
+			width: 100%;
+			height: 198px;
+		}
+
+		section {
+			padding: 10px;
+
+			.price {
+				font-weight: bold;
+			}
+		}
+
+		.panel-footer {
+			text-align: center;
+			font-size: 12px;
+		}
+	}
+}

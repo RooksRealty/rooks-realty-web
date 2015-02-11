@@ -1,4 +1,5 @@
-require 'open-uri'
+require "net/http"
+require 'fileutils'
 
 namespace :import do
 
@@ -7,6 +8,7 @@ namespace :import do
     doc = Nokogiri::HTML(open("http://athomeshuntsville.com/homesforsale/index.php?LO_CODE=ROOKS+REALTY,+INC&action=searchresults"))
 
 	doc.xpath("//body//div[@class='container']//div[@class='container']//div[@class='row']//div[@class='span8']").each do |list|
+		idx = 0;
 		if list.children[3]
 			listing = list.children[3].children[1].children[1].children[3].children[1]
 			details1 = list.children[7].children[1].children[1]
@@ -46,11 +48,20 @@ namespace :import do
 
 			current_realtor = Realtor.find_by_name(realtor)
 			current_realtor = Realtor.create!(:name => realtor) if current_realtor.nil?
+			idx = idx + 1
+
+			url = URI.parse("http://huntsvillelandproperty.com/lots-for-sale/photos/#{mls}/#{mls}-1.jpg")
+			req = Net::HTTP.new(url.host, url.port)
+			res = req.request_head(url.path)
+			url = res.code == '200' ? "http://huntsvillelandproperty.com/lots-for-sale/photos/#{mls}/#{mls}-1.jpg" : nil
+			# FileUtils.copy('app/assets/images/no_image_available.gif', "#{mls}-1.jpg")
+			# url = "#{mls}-1.jpg" if url.nil? 	
 
 			if Listing.find_by_mls(mls).nil?
-				Listing.create(:address => address, :city => city, :zipcode => zip_code, 
+				new_listing = Listing.create(:address => address, :city => city, :zipcode => zip_code, 
 					:acres => acres, :bathrooms => bathrooms, :bedrooms => bedrooms, :garages => garages,
-					:mls => mls, :price => price, :sqft => sqft, :realtor_id => current_realtor.id)
+					:mls => mls, :price => price, :sqft => sqft, :realtor_id => current_realtor.id,
+					:avatar => url)
 			end
 		end
 	end
