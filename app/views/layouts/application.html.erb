@@ -36,16 +36,22 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-<div class="container">
+<div>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<div>
+  <div ng-app="rooksRealty">
 
-<div class="container">
-<%= yield %>
+    <div class="cd-fixed-bg cd-bg-1">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div> 
+
+    <%= yield %>
+
+  </div>
 </div>
 
-<div class="container" ng-app="rooksRealty">
+<section class="well well-lg">
   <div class="row">
     <div class="col-md-3">
       <h2>Company</h2>
@@ -86,7 +92,7 @@
   <footer>
     <p>© Rooks Realty, Inc 2015</p>
   </footer>
-</div>
+</section>
 
 </div>
 

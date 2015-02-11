@@ -1,22 +1,29 @@
-.listing {
-	.panel {
+.listings {
+    overflow-x: auto;
+    white-space: nowrap;
 
-		.thumbnail {
-			width: 100%;
-			height: 198px;
-		}
+	.listing {
+	    display: inline-block;
+	    float: none;
 
-		section {
-			padding: 10px;
-
-			.price {
-				font-weight: bold;
+		.panel {
+			.image {
+				width: 100%;
+				height: 198px;
 			}
-		}
 
-		.panel-footer {
-			text-align: center;
-			font-size: 12px;
+			section {
+				padding: 10px;
+
+				.price {
+					font-weight: bold;
+				}
+			}
+
+			.panel-heading {
+				text-align: center;
+				font-size: 12px;
+			}
 		}
 	}
 }

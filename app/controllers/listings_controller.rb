@@ -1,5 +1,7 @@
 class ListingsController < ApplicationController
   respond_to :json
+  
+  before_filter :restrict_access
 
   def index
   	@listings = Listing.all
