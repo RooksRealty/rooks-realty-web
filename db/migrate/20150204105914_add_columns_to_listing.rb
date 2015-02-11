@@ -1,6 +1,6 @@
 class AddColumnsToListing < ActiveRecord::Migration
   def change
-  	add_column :listings, :acres, :double
+  	add_column :listings, :acres, :float
   	add_column :listings, :bedrooms, :integer
   	add_column :listings, :bathrooms, :integer
   	add_column :listings, :garages, :integer
