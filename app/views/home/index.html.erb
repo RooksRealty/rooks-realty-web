@@ -1,34 +1,3 @@
-
-  <section>
-  <h2>Listings</h2>
-
-  <div class="listings cd-scrolling-bg cd-color-2" ng-controller='HomeController'>
-    <div class="row cd-container">
-      <div class="col-md-3 listing" ng-repeat="listing in listings">
-        <div class="panel panel-primary">
-          <img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/medium/{{listing.avatar_file_name}}" class="image"/>
-          <img ng-show="listing.avatar_file_name == null" src="assets/no_image_available.gif" class="image"/>
-          <section>
-            <p class="price">
-              {{listing.price | currency:"$":0 }}
-            </p>
-            <p class="address">
-              {{listing.address}}<br>
-              {{listing.city}}, {{listing.state}} {{listing.zipcode}}
-            </p>
-            <p class="realtor">
-              Realtor: {{listing.realtor.name}}
-            </p>
-          </section>
-          <div class="panel-heading">
-            {{listing.bedrooms}} <i class="fa fa-bed"></i>
-            | {{listing.bathrooms}} <%= image_tag 'shower.png' %>
-            | {{listing.sqft | number}} Sq Ft
-            <span ng-show="listing.acres">| {{listing.acres | number}} Acres</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  </section>
+<div class="view-container">
+  <div ng-view class="view-frame animate-view"></div>
+</div>

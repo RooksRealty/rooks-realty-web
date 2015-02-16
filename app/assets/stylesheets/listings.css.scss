@@ -7,9 +7,11 @@
 	    float: none;
 
 		.panel {
-			.image {
-				width: 100%;
-				height: 198px;
+			a {
+				img {
+					width: 100%;
+					height: 198px;
+				}
 			}
 
 			section {

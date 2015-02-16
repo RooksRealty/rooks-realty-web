@@ -1,5 +1,6 @@
 asset 'angular'
 asset 'angular-resource'
 asset 'angular-route'
+asset 'angular-bootstrap'
 asset 'bootstrap-sass-official'
 asset 'components-font-awesome'
