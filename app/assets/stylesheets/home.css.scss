@@ -9,11 +9,33 @@ body, html, container {
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position: center center;
-}
- 
-.cd-fixed-bg.cd-bg-1 {
-  background-image: url("huntsville.jpg");
-  min-height: 350px;
+	
+	&.cd-bg-1 {
+	  background-image: url("huntsville.jpg");
+	  min-height: 350px;
+	}
+
+	form {
+		margin-top: 100px;
+		
+		.right-inner-addon {
+		    position: relative;
+		    width: 50%;
+		    margin: auto;
+		 
+		 	input {
+		    	padding-right: 30px;    
+		    	width: 100%;
+			}
+		 
+		 	i {
+		    	position: absolute;
+			    right: 0px;
+			    padding: 15px 12px;
+			    pointer-events: none;
+			}
+		}
+	}
 }
  
 .cd-scrolling-bg {
