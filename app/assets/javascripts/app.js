@@ -7,7 +7,7 @@
 
   app.factory('Listings', ['$resource', function ($resource) {
     return $resource('/listings.json', {}, {
-      query: { method: 'GET', isArray: true, headers: { 'Authorization' : 'Token token="fff269fdbbd1977bb19f6a81104f79b4"' } },
+      query: { method: 'GET', isArray: true, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
       create: { method: 'POST' }
     });
 	}]);
