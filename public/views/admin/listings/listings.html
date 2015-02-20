@@ -3,27 +3,27 @@
 	<thead>
 		<tr>
 			<th></th>
-			<th>Address</th>
-			<th>Price</th>
-			<th>MLS</th>
-			<th>Acres</th>
-			<th># Bedrooms</th>
-			<th># Bathrooms</th>
-			<th>Garage</th>
-			<th>SQFT</th>
-			<th>Realtor</th>
+			<th ng-click="columnFilter('mls')">MLS <i ng-class="updateSortArrow('mls')"></th>
+			<th ng-click="columnFilter('address')">Address <i ng-class="updateSortArrow('address')"></th>
+			<th ng-click="columnFilter('price')">Price <i ng-class="updateSortArrow('price')"></th>
+			<th ng-click="columnFilter('acres')">Acres <i ng-class="updateSortArrow('acres')"></th>
+			<th ng-click="columnFilter('bedrooms')"># Bedrooms <i ng-class="updateSortArrow('bedrooms')"></th>
+			<th ng-click="columnFilter('bathrooms')"># Bathrooms <i ng-class="updateSortArrow('bathrooms')"></th>
+			<th ng-click="columnFilter('garages')">Garage <i ng-class="updateSortArrow('garages')"></th>
+			<th ng-click="columnFilter('sqft')">SQFT <i ng-class="updateSortArrow('sqft')"></th>
+			<th ng-click="columnFilter('realtor')">Realtor <i ng-class="updateSortArrow('realtor')"></th>
 		</tr>
 	</thead>
 
 	<tbody>
-		<tr ng-repeat="listing in listings">
+		<tr ng-repeat="listing in filtered = (listings | filter:search | orderBy:orderByField:reverseSort)">
 			<td>
 				<img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/>
             <img ng-show="listing.avatar_file_name == null" class="thumb" src="assets/no_image_available.gif"/>
 			</td>
+			<td>{{listing.mls}}</td>
 			<td>{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}</td>
 			<td>{{listing.price | currency:"$":0 }}</td>
-			<td>{{listing.mls}}</td>
 			<td>{{listing.acres | number}}</td>
 			<td>{{listing.bedrooms}}</td>
 			<td>{{listing.bathrooms}}</td>

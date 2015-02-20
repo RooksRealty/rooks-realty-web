@@ -26,6 +26,21 @@ app.factory('Listings', ['$resource', function ($resource) {
 app.controller('AdminController', ['$scope', '$resource', 'Listings',
 	function ($scope, $resource, Listings) {
 
+		$scope.orderByField = 'mls';
+      	$scope.reverseSort = false;
 		$scope.listings = Listings.query();
+
+		$scope.columnFilter = function (name) {
+			$scope.orderByField = name; 
+			$scope.reverseSort = !$scope.reverseSort;
+		}
+
+		$scope.updateSortArrow = function (column) {
+			return {
+				'fa fa-sort':$scope.orderByField != column,
+				'fa fa-sort-up':!$scope.reverseSort && $scope.orderByField == column, 
+				'fa fa-sort-down':$scope.reverseSort && $scope.orderByField == column
+			};
+		}
 	}
 ]);
