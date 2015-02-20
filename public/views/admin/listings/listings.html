@@ -1,0 +1,36 @@
+<table class="table" ng-controller="AdminController">
+
+	<thead>
+		<tr>
+			<th></th>
+			<th>Address</th>
+			<th>Price</th>
+			<th>MLS</th>
+			<th>Acres</th>
+			<th># Bedrooms</th>
+			<th># Bathrooms</th>
+			<th>Garage</th>
+			<th>SQFT</th>
+			<th>Realtor</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr ng-repeat="listing in listings">
+			<td>
+				<img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/>
+            <img ng-show="listing.avatar_file_name == null" class="thumb" src="assets/no_image_available.gif"/>
+			</td>
+			<td>{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}</td>
+			<td>{{listing.price | currency:"$":0 }}</td>
+			<td>{{listing.mls}}</td>
+			<td>{{listing.acres | number}}</td>
+			<td>{{listing.bedrooms}}</td>
+			<td>{{listing.bathrooms}}</td>
+			<td>{{listing.garages}}</td>
+			<td>{{listing.sqft}}</td>
+			<td>{{listing.realtor.name}}</td>
+		</tr>
+	</tbody>
+
+</table>

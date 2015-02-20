@@ -1,0 +1,21 @@
+.dashboard {
+	margin-top: 100px;
+
+	.content {
+		margin: 30px;
+
+		table {
+			tbody {
+				tr {
+					td {
+						img {
+							&.thumb {
+								width: 100px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
