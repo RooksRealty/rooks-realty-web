@@ -1,8 +1,94 @@
 <div ng-controller="AdminController">
 
+<script type="text/ng-template" id="edit-listing.html">
+    <div class="modal-header">
+    	<h3 class="modal-title" ng-hide="listing">Add New Listing</h3>
+        <h3 class="modal-title" ng-show="listing">Edit Listing</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+		  <div class="form-group">
+		    <label for="mls" class="col-sm-2 control-label">MLS</label>
+		    <div class="col-sm-5">
+		      <input type="number" class="form-control" id="mls" ng-model="listing.mls" placeholder="MLS #" required>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="address" class="col-sm-2 control-label">Address</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="address" ng-model="listing.address" placeholder="e.g. 3579 Market St.">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="city" class="col-sm-2 control-label">City</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" ng-model="listing.city" id="city">
+		    </div>
+		    <label for="state" class="col-sm-1 control-label">State</label>
+		    <div class="col-sm-2">
+		      	<select class="form-control" ng-model="listing.state">
+		      	  <option></option>
+				  <option>AL</option>
+				  <option>GA</option>
+				  <option>MS</option>
+				  <option>TN</option>
+				</select>
+		    </div>
+		    <label for="zipcode" class="col-sm-2 control-label">Zip Code</label>
+		    <div class="col-sm-2">
+		      <input type="text" class="form-control" id="zipcode" ng-model="listing.zipcode" required>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="price" class="col-sm-2 control-label">Price</label>
+		    <div class="col-sm-3 input-group" style="padding-left: 14px;">
+		      <span class="input-group-addon">$</span>
+			  <input type="number" class="form-control" id="price" ng-model="listing.price" aria-label="Amount (to the nearest dollar)" required>
+			  <span class="input-group-addon">.00</span>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="bedrooms" class="col-sm-2 control-label"># of Bedrooms</label>
+		    <div class="col-sm-2">
+		      <input type="number" class="form-control" id="bedrooms" ng-model="listing.bedrooms">
+		    </div>
+		    <label for="bathrooms" class="col-sm-2 control-label"># of Bathrooms</label>
+		    <div class="col-sm-2">
+		      <input type="number" class="form-control" id="bathrooms" ng-model="listing.bathrooms">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="garages" class="col-sm-2 control-label"># of Garages</label>
+		    <div class="col-sm-2">
+		      <input type="number" class="form-control" id="garages" ng-model="listing.garages">
+		    </div>
+		    <label for="sqft" class="col-sm-2 control-label">Sq Ft</label>
+		    <div class="col-sm-2">
+		      <input type="number" class="form-control" id="sqft" ng-model="listing.sqft">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="realtor" class="col-sm-2 control-label">Realtor</label>
+		    <div class="col-sm-5">
+		      	<select class="form-control" id="realtor" ng-model="listing.realtor.name" required>
+		      	  <option></option>
+				  <option ng-repeat="realtor in realtors" id="{{realtor.id}}">{{realtor.name}}</option>
+				</select>
+		    </div>
+		  </div>
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+
+<button class="btn btn-primary" type="submit" ng-click="openModal({})"><i class="fa fa-plus"></i> Add a Listing</button>
 <input type="text" ng-model="search" class="search-query form-control input-lg" placeholder="Search by MLS, Address, Realtor, etc.">
 
-<table class="table">
+<table class="table table-hover">
 
 	<thead>
 		<tr>
@@ -20,7 +106,7 @@
 	</thead>
 
 	<tbody>
-		<tr ng-repeat="listing in filtered = (listings | filter:search | orderBy:orderByField:reverseSort)">
+		<tr ng-click="openModal(listing)" ng-repeat="listing in filtered = (listings | filter:search | orderBy:orderByField:reverseSort)">
 			<td>
 				<img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/>
             <img ng-show="listing.avatar_file_name == null" class="thumb" src="assets/no_image_available.gif"/>

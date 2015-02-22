@@ -1,4 +1,4 @@
-var app = angular.module('rooksRealtyAdmin',['ngResource', 'ngRoute']);
+var app = angular.module('rooksRealtyAdmin',['ngResource', 'ngRoute', 'ui.bootstrap']);
 
 app.config(["$httpProvider", function (provider) {
     provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
@@ -23,8 +23,15 @@ app.factory('Listings', ['$resource', function ($resource) {
 	});
 }]);
 
-app.controller('AdminController', ['$scope', '$resource', 'Listings',
-	function ($scope, $resource, Listings) {
+app.factory('Realtors', ['$resource', function ($resource) {
+	return $resource('/realtors.json', {}, {
+	  query: { method: 'GET', isArray: true, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
+	  create: { method: 'POST' }
+	});
+}]);
+
+app.controller('AdminController', ['$scope', '$resource', 'Listings', '$modal',
+	function ($scope, $resource, Listings, $modal) {
 
 		$scope.orderByField = 'mls';
       	$scope.reverseSort = false;
@@ -42,5 +49,30 @@ app.controller('AdminController', ['$scope', '$resource', 'Listings',
 				'fa fa-sort-down':$scope.reverseSort && $scope.orderByField == column
 			};
 		}
+
+      	$scope.openModal = function (currentListing) {
+      		var modalInstance = $modal.open({
+		      templateUrl: 'edit-listing.html',
+		      controller: 'EditListingController',
+		      size: 'lg',
+		      resolve: {
+		        listing: function () {
+		          return currentListing;
+		        }
+		      }
+		    });
+
+		    modalInstance.result.then(function (selectedItem) {
+		      $scope.selected = selectedItem;
+		    }, function () {
+		     	console.log('Modal dismissed at: ' + new Date());
+		    });
+      	}
 	}
 ]);
+
+app.controller('EditListingController', ['$scope', 'Realtors', 'listing', function ($scope, Realtors, listing) {
+	$scope.realtors = Realtors.query();
+	$scope.listing = listing;
+
+}]);
