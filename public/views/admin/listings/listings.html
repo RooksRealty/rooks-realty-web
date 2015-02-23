@@ -76,52 +76,69 @@
 				</select>
 		    </div>
 		  </div>
+		  <div class="form-group">
+		  	<label for="image" class="col-sm-2 control-label">Picture</label>
+		  	<div class="col-sm-5">
+		  		<img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/>
+		  		<input type="file" class="form-control" id="image" ng-model="listing.avatar_file_name">
+		  	</div>
+		  </div>
 		</form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-primary" ng-hide="listing.id" ng-click="create()">OK</button>
+        <button class="btn btn-primary" ng-show="listing.id" ng-click="update()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </script>
 
+<div class="loading" ng-show="loading">
+	<img src="assets/loading.gif"/>
+	<p>Loading...</p>
+</div>
 
-<button class="btn btn-primary" type="submit" ng-click="openModal({})"><i class="fa fa-plus"></i> Add a Listing</button>
-<input type="text" ng-model="search" class="search-query form-control input-lg" placeholder="Search by MLS, Address, Realtor, etc.">
+<div ng-hide="loading">
 
-<table class="table table-hover">
+	<button class="btn btn-primary" type="submit" ng-click="openModal({})"><i class="fa fa-plus"></i> Add a Listing</button>
+	<input type="text" ng-model="search" class="search-query form-control input-lg" placeholder="Search by MLS, Address, Realtor, etc.">
 
-	<thead>
-		<tr>
-			<th></th>
-			<th ng-click="columnFilter('mls')">MLS <i ng-class="updateSortArrow('mls')"></th>
-			<th ng-click="columnFilter('address')">Address <i ng-class="updateSortArrow('address')"></th>
-			<th ng-click="columnFilter('price')">Price <i ng-class="updateSortArrow('price')"></th>
-			<th ng-click="columnFilter('acres')">Acres <i ng-class="updateSortArrow('acres')"></th>
-			<th ng-click="columnFilter('bedrooms')"># Bedrooms <i ng-class="updateSortArrow('bedrooms')"></th>
-			<th ng-click="columnFilter('bathrooms')"># Bathrooms <i ng-class="updateSortArrow('bathrooms')"></th>
-			<th ng-click="columnFilter('garages')">Garage <i ng-class="updateSortArrow('garages')"></th>
-			<th ng-click="columnFilter('sqft')">SQFT <i ng-class="updateSortArrow('sqft')"></th>
-			<th ng-click="columnFilter('realtor')">Realtor <i ng-class="updateSortArrow('realtor')"></th>
-		</tr>
-	</thead>
+	<table class="table table-hover">
 
-	<tbody>
-		<tr ng-click="openModal(listing)" ng-repeat="listing in filtered = (listings | filter:search | orderBy:orderByField:reverseSort)">
-			<td>
-				<img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/>
-            <img ng-show="listing.avatar_file_name == null" class="thumb" src="assets/no_image_available.gif"/>
-			</td>
-			<td>{{listing.mls}}</td>
-			<td>{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}</td>
-			<td>{{listing.price | currency:"$":0 }}</td>
-			<td>{{listing.acres | number}}</td>
-			<td>{{listing.bedrooms}}</td>
-			<td>{{listing.bathrooms}}</td>
-			<td>{{listing.garages}}</td>
-			<td>{{listing.sqft}}</td>
-			<td>{{listing.realtor.name}}</td>
-		</tr>
-	</tbody>
+		<thead>
+			<tr>
+				<th></th>
+				<th ng-click="columnFilter('mls')">MLS <i ng-class="updateSortArrow('mls')"></th>
+				<th ng-click="columnFilter('address')">Address <i ng-class="updateSortArrow('address')"></th>
+				<th ng-click="columnFilter('price')">Price <i ng-class="updateSortArrow('price')"></th>
+				<th ng-click="columnFilter('acres')">Acres <i ng-class="updateSortArrow('acres')"></th>
+				<th ng-click="columnFilter('bedrooms')"># Bedrooms <i ng-class="updateSortArrow('bedrooms')"></th>
+				<th ng-click="columnFilter('bathrooms')"># Bathrooms <i ng-class="updateSortArrow('bathrooms')"></th>
+				<th ng-click="columnFilter('garages')">Garage <i ng-class="updateSortArrow('garages')"></th>
+				<th ng-click="columnFilter('sqft')">SQFT <i ng-class="updateSortArrow('sqft')"></th>
+				<th ng-click="columnFilter('realtor')">Realtor <i ng-class="updateSortArrow('realtor')"></th>
+			</tr>
+		</thead>
 
-</table>
+		<tbody>
+			<tr ng-click="openModal(listing)" ng-repeat="listing in filtered = (listings | filter:search | orderBy:orderByField:reverseSort)">
+				<td>
+					<img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/>
+	            <img ng-show="listing.avatar_file_name == null" class="thumb" src="assets/no_image_available.gif"/>
+				</td>
+				<td>{{listing.mls}}</td>
+				<td>{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}</td>
+				<td>{{listing.price | currency:"$":0 }}</td>
+				<td>{{listing.acres | number}}</td>
+				<td>{{listing.bedrooms}}</td>
+				<td>{{listing.bathrooms}}</td>
+				<td>{{listing.garages}}</td>
+				<td>{{listing.sqft}}</td>
+				<td>{{listing.realtor.name}}</td>
+			</tr>
+		</tbody>
+
+	</table>
+
+</div>
+
 </div>

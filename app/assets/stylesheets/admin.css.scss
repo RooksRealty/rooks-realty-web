@@ -3,6 +3,7 @@
 
 	.content {
 		margin: 30px;
+		min-height: 250px;
 
 		input {
 			margin-bottom: 20px;
@@ -30,6 +31,16 @@
 					}
 				}
 			}
+		}
+	}
+
+	.loading {
+		margin: 30px auto;
+		display: block;
+		width: 10em;
+
+		p {
+			text-align: center;
 		}
 	}
 }

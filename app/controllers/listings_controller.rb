@@ -27,14 +27,27 @@ class ListingsController < ApplicationController
   def create
     @listing = Listing.new(listing_params)
     @listing.save
-    respond_with(@listing) do |format|
-      format.to_json { @listing.to_json }
+
+    if @listing
+      @listing.realtor = Realtor.find_by_name(params[:listing][:realtor][:name]) if params[:listing][:realtor].present?
+      @listing.save!
+
+      respond_with(@listing) do |format|
+        format.to_json { @listing.to_json }
+      end
     end
   end
 
   def update
-    @listing.update(listing_params)
-    respond_with(@listing)
+    @listing = Listing.find(params[:id])
+    if @listing.update(listing_params)
+      @listing.realtor = Realtor.find_by_name(params[:realtor][:name]) if params[:realtor].present?
+      @listing.save!
+
+      respond_with(@listing) do |format|
+        format.to_json { @listing.to_json }
+      end
+    end
   end
 
   def destroy
@@ -45,7 +58,7 @@ class ListingsController < ApplicationController
   private
 
   def listing_params
-  	params.require(:listing).permit(:address, :city, :zipcode, :price, :mls, :bedrooms, :bathrooms, :garages, :sqft)
+  	params.require(:listing).permit(:address, :city, :zipcode, :state, :price, :mls, :bedrooms, :bathrooms, :garages, :sqft, :realtor)
   end
 
 end
