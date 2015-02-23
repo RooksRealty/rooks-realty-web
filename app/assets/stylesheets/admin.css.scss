@@ -23,11 +23,6 @@
 						cursor: pointer;
 					}
 					td {
-						img {
-							&.thumb {
-								width: 100px;
-							}
-						}
 					}
 				}
 			}
@@ -42,6 +37,12 @@
 		p {
 			text-align: center;
 		}
+	}
+}
+
+img {
+	&.thumb {
+		width: 100px;
 	}
 }
 

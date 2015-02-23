@@ -72,22 +72,22 @@
 		    <div class="col-sm-5">
 		      	<select class="form-control" id="realtor" ng-model="listing.realtor.name" required>
 		      	  <option></option>
-				  <option ng-repeat="realtor in realtors" id="{{realtor.id}}">{{realtor.name}}</option>
+				  <option ng-repeat="realtor in realtors" value="{{realtor.id}}">{{realtor.name}}</option>
 				</select>
 		    </div>
 		  </div>
 		  <div class="form-group">
 		  	<label for="image" class="col-sm-2 control-label">Picture</label>
 		  	<div class="col-sm-5">
-		  		<img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/>
-		  		<input type="file" class="form-control" id="image" ng-model="listing.avatar_file_name">
+		  		<img ng-hide="temp_file" class="thumb" ng-src="{{listing.avatar}}"/>
+		  		<input type="file" ng-file-select="setFile($files)" multiple>
 		  	</div>
 		  </div>
 		</form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-hide="listing.id" ng-click="create()">OK</button>
-        <button class="btn btn-primary" ng-show="listing.id" ng-click="update()">OK</button>
+        <button class="btn btn-primary" ng-hide="listing.id" ng-click="create()">Create</button>
+        <button class="btn btn-primary" ng-show="listing.id" ng-click="update()">Update</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </script>
@@ -122,8 +122,7 @@
 		<tbody>
 			<tr ng-click="openModal(listing)" ng-repeat="listing in filtered = (listings | filter:search | orderBy:orderByField:reverseSort)">
 				<td>
-					<img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/>
-	            <img ng-show="listing.avatar_file_name == null" class="thumb" src="assets/no_image_available.gif"/>
+					<img class="thumb" ng-src="{{listing.avatar}}"/>
 				</td>
 				<td>{{listing.mls}}</td>
 				<td>{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}</td>

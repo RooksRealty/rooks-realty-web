@@ -6,14 +6,14 @@ class ListingsController < ApplicationController
   def index
   	@listings = Listing.all
   	respond_with(@listings) do |format|
-      format.to_json { render :json => @listings.as_json(:include => :realtor) }
+      format.to_json { render :json => @listings.as_json(:include => [:realtor, :avatar]) }
     end
   end
 
   def show
   	@listing = Listing.find(params[:id])
   	respond_with(@listing) do |format|
-      format.to_json { @listing.to_json(:include => :realtor) }
+      format.to_json { @listing.to_json(:include => [:realtor, :avatar]) }
     end
   end
 
@@ -58,7 +58,7 @@ class ListingsController < ApplicationController
   private
 
   def listing_params
-  	params.require(:listing).permit(:address, :city, :zipcode, :state, :price, :mls, :bedrooms, :bathrooms, :garages, :sqft, :realtor)
+  	params.require(:listing).permit(:address, :city, :zipcode, :state, :price, :mls, :bedrooms, :bathrooms, :garages, :sqft, :realtor, :avatar_file_name)
   end
 
 end

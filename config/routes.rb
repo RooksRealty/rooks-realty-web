@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'admin' => 'admin#index'
+  post 'admin/listing/image/upload/:id' => 'admin#image_upload'
 end

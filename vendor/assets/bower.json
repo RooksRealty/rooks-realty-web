@@ -6,6 +6,8 @@
     "angular-route": "latest",
     "angular-bootstrap": "latest",
     "bootstrap-sass-official": "latest",
-    "components-font-awesome": "latest"
+    "components-font-awesome": "latest",
+    "ng-file-upload": "latest",
+    "ng-file-upload-shim": "latest"
   }
 }
