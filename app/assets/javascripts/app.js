@@ -28,6 +28,12 @@
 
 			$scope.listings = Listings.query();
 
+      $scope.recent = function (listing) {
+        var created_at = new Date(listing.created_at);
+        var ONE_WEEK = 60*60*24*7*1000;
+        return ((new Date) - created_at) < ONE_WEEK;
+      }
+
       $scope.showListing = function () {
         // var modalInstance = $modal.open({
         //   templateUrl: 'views/listings/listing-detail.html',

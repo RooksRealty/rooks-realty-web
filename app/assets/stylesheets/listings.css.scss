@@ -5,6 +5,7 @@
 	.listing {
 	    display: inline-block;
 	    float: none;
+		height: 380px;
 
 		.panel {
 			a {
@@ -15,6 +16,7 @@
 			}
 
 			section {
+				height: 125px;
 				padding: 10px;
 
 				.price {
@@ -25,6 +27,30 @@
 			.panel-heading {
 				text-align: center;
 				font-size: 12px;
+			}
+		}
+	}
+	 
+	.ribbon {
+		color: #fff;
+		margin: 15px 0 50px;
+		position: relative;
+		text-transform: uppercase;
+		background: #a94442;
+		border: 1px solid #a94442;
+		box-shadow: 0px 1px 3px rgba(0,0,0,.2);
+		padding: 5px 10px;
+		clear: both;
+	}
+
+	div {
+		&.ribbon-left{
+			color: #fff;
+			float: left;
+			position: absolute;
+			 
+			p {
+				margin: 0 12px;
 			}
 		}
 	}

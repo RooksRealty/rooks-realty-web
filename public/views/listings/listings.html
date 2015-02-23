@@ -5,11 +5,13 @@
   <div class="listings cd-scrolling-bg cd-color-2" ng-controller='HomeController'>
     <div class="row cd-container">
       <div class="col-md-3 listing" ng-repeat="listing in listings">
+        <div ng-show="recent(listing)" class="ribbon ribbon-left">
+          <p>New</p>
+        </div>
         <div class="panel panel-primary">
           
           <a href="#" ng-click="showListing()">
-            <img ng-show="listing.avatar_file_name != null" ng-src="/system/listings/avatars/000/000/00{{listing.id}}/medium/{{listing.avatar_file_name}}"/>
-            <img ng-show="listing.avatar_file_name == null" src="assets/no_image_available.gif"/>
+            <img ng-src="{{listing.avatar}}"/>
           </a>
 
           <section>

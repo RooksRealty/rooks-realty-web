@@ -4,7 +4,7 @@ class ListingsController < ApplicationController
   before_filter :restrict_access
 
   def index
-  	@listings = Listing.all
+  	@listings = Listing.all.order('created_at DESC')
   	respond_with(@listings) do |format|
       format.to_json { render :json => @listings.as_json(:include => [:realtor, :avatar]) }
     end
