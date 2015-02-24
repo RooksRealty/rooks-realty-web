@@ -120,7 +120,7 @@
 		</thead>
 
 		<tbody>
-			<tr ng-click="openModal(listing)" ng-repeat="listing in filtered = (listings | filter:search | orderBy:orderByField:reverseSort)">
+			<tr ng-click="openModal(listing)" ng-repeat="listing in filtered = (filteredListings | filter:search | orderBy:orderByField:reverseSort)">
 				<td>
 					<img class="thumb" ng-src="{{listing.avatar}}"/>
 				</td>
@@ -137,6 +137,10 @@
 		</tbody>
 
 	</table>
+
+	<div class="text-center">
+    	<pagination total-items="listings.length" ng-model="currentPage"></pagination>
+    </div>
 
 </div>
 

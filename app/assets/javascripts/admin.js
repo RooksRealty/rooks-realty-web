@@ -44,9 +44,29 @@ app.controller('AdminController', ['$scope', '$resource', 'Listings', '$modal',
 		$scope.orderByField = 'mls';
       	$scope.reverseSort = false;
 		$scope.loading = true;
+		$scope.currentPage = 1;
+  		$scope.numPerPage = 10;
+  		$scope.maxSize = 5;
 
 		$scope.listings = Listings.query(function () {
 			$scope.loading = false;
+			var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+		    var end = begin + $scope.numPerPage;
+		    
+		    $scope.filteredListings = $scope.listings.slice(begin, end);
+		});
+
+		$scope.numPages = function () {
+		    return Math.ceil($scope.listings.length / $scope.numPerPage);
+		};
+		  
+		$scope.$watch('currentPage + numPerPage', function() {
+		    var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+		    var end = begin + $scope.numPerPage;
+		    
+		    if($scope.listings) {
+			    $scope.filteredListings = $scope.listings.slice(begin, end);
+			}
 		});
 
 		$scope.columnFilter = function (name) {
