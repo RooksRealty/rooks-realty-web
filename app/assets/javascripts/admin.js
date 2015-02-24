@@ -27,7 +27,7 @@ app.factory('ListingService', ['$resource', function ($resource) {
     return $resource('/listings/:id.json', {}, {
       show: { method: 'GET' },
       update: { method: 'PUT', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
-      delete: { method: 'DELETE', params: {id: '@id'} }
+      delete: { method: 'DELETE', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
     });
 }]);
 
@@ -38,8 +38,8 @@ app.factory('Realtors', ['$resource', function ($resource) {
 	});
 }]);
 
-app.controller('AdminController', ['$scope', '$resource', 'Listings', '$modal',
-	function ($scope, $resource, Listings, $modal) {
+app.controller('AdminController', ['$scope', '$resource', 'Listings', 'ListingService', '$modal',
+	function ($scope, $resource, Listings, ListingService, $modal) {
 
 		$scope.orderByField = 'mls';
       	$scope.reverseSort = false;
@@ -48,13 +48,15 @@ app.controller('AdminController', ['$scope', '$resource', 'Listings', '$modal',
   		$scope.numPerPage = 10;
   		$scope.maxSize = 5;
 
-		$scope.listings = Listings.query(function () {
-			$scope.loading = false;
-			var begin = (($scope.currentPage - 1) * $scope.numPerPage);
-		    var end = begin + $scope.numPerPage;
-		    
-		    $scope.filteredListings = $scope.listings.slice(begin, end);
-		});
+  		$scope.init = function () {
+			$scope.listings = Listings.query(function () {
+				$scope.loading = false;
+				var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+			    var end = begin + $scope.numPerPage;
+			    
+			    $scope.filteredListings = $scope.listings.slice(begin, end);
+			});
+		}
 
 		$scope.numPages = function () {
 		    return Math.ceil($scope.listings.length / $scope.numPerPage);
@@ -82,6 +84,15 @@ app.controller('AdminController', ['$scope', '$resource', 'Listings', '$modal',
 			};
 		}
 
+		$scope.removeListing = function (listingId) {
+			var response = confirm("Are you sure you want to remove this listing?");
+			if (response == true) {
+			    ListingService.delete({ id: listingId }, function () {
+		        	$scope.init();
+		        });
+			}
+		};
+
       	$scope.openModal = function (currentListing) {
       		var modalInstance = $modal.open({
 		      templateUrl: 'edit-listing.html',
@@ -97,13 +108,12 @@ app.controller('AdminController', ['$scope', '$resource', 'Listings', '$modal',
 		    modalInstance.result.then(function (selectedItem) {
 		      $scope.selected = selectedItem;
 			  $scope.loading = true;
-			  $scope.listings = Listings.query(function () {
-				$scope.loading = false;
-			  });
 		    }, function () {
-		     	console.log('Modal dismissed at: ' + new Date());
+			  $scope.init();
 		    });
       	};
+
+  		$scope.init();
 	}
 ]);
 
@@ -134,6 +144,15 @@ app.controller('EditListingController', ['$scope', '$modalInstance', 'Realtors',
 
 		$scope.cancel = function () {
 			$modalInstance.dismiss('cancel');
+		};
+
+		$scope.removeListing = function (listingId) {
+			var response = confirm("Are you sure you want to remove this listing?");
+			if (response == true) {
+			    ListingService.delete({ id: listingId }, function () {
+		        	$modalInstance.dismiss();
+		        });
+			}
 		};
 
 		$scope.setFile = function (files) {

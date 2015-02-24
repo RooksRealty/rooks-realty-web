@@ -51,6 +51,7 @@ class ListingsController < ApplicationController
   end
 
   def destroy
+    @listing = Listing.find(params[:id])
     @listing.destroy
     respond_with(@listing)
   end

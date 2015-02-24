@@ -2,6 +2,7 @@
 
 <script type="text/ng-template" id="edit-listing.html">
     <div class="modal-header">
+        <button class="btn btn-danger pull-right" ng-click="removeListing(listing.id)"><i class="fa fa-trash"></i></button>
     	<h3 class="modal-title" ng-hide="listing">Add New Listing</h3>
         <h3 class="modal-title" ng-show="listing">Edit Listing</h3>
     </div>
@@ -111,16 +112,18 @@
 				<th ng-click="columnFilter('address')">Address <i ng-class="updateSortArrow('address')"></th>
 				<th ng-click="columnFilter('price')">Price <i ng-class="updateSortArrow('price')"></th>
 				<th ng-click="columnFilter('acres')">Acres <i ng-class="updateSortArrow('acres')"></th>
-				<th ng-click="columnFilter('bedrooms')"># Bedrooms <i ng-class="updateSortArrow('bedrooms')"></th>
-				<th ng-click="columnFilter('bathrooms')"># Bathrooms <i ng-class="updateSortArrow('bathrooms')"></th>
+				<th ng-click="columnFilter('bedrooms')">Beds </i> <i ng-class="updateSortArrow('bedrooms')"></th>
+				<th ng-click="columnFilter('bathrooms')">Baths <i ng-class="updateSortArrow('bathrooms')"></th>
 				<th ng-click="columnFilter('garages')">Garage <i ng-class="updateSortArrow('garages')"></th>
 				<th ng-click="columnFilter('sqft')">SQFT <i ng-class="updateSortArrow('sqft')"></th>
 				<th ng-click="columnFilter('realtor')">Realtor <i ng-class="updateSortArrow('realtor')"></th>
+				<th ng-click="columnFilter('created_at')">Created At <i ng-class="updateSortArrow('created_at')"></th>
+				<th></th>
 			</tr>
 		</thead>
 
 		<tbody>
-			<tr ng-click="openModal(listing)" ng-repeat="listing in filtered = (filteredListings | filter:search | orderBy:orderByField:reverseSort)">
+			<tr ng-repeat="listing in filtered = (filteredListings | filter:search | orderBy:orderByField:reverseSort)">
 				<td>
 					<img class="thumb" ng-src="{{listing.avatar}}"/>
 				</td>
@@ -133,6 +136,11 @@
 				<td>{{listing.garages}}</td>
 				<td>{{listing.sqft}}</td>
 				<td>{{listing.realtor.name}}</td>
+				<td>{{listing.created_at | date:'MMM dd, yyyy'}}</td>
+				<td>
+					<button class="btn btn-info btn-xs" ng-click="openModal(listing)"><i class="fa fa-edit"></i></button>
+					<button class="btn btn-danger btn-xs" ng-click="removeListing(listing.id)"><i class="fa fa-trash"></i></button>
+				</td>
 			</tr>
 		</tbody>
 
