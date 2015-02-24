@@ -11,7 +11,7 @@
 			a {
 				img {
 					width: 100%;
-					height: 198px;
+					height: auto;
 				}
 			}
 
@@ -54,4 +54,11 @@
 			}
 		}
 	}
+}
+
+@media (max-width: 765px) {
+	.listings {
+	    overflow-x: auto;
+	    white-space: nowrap;
+    }
 }

@@ -136,7 +136,7 @@
 				<td>{{listing.garages}}</td>
 				<td>{{listing.sqft}}</td>
 				<td>{{listing.realtor.name}}</td>
-				<td>{{listing.created_at | date:'MMM dd, yyyy'}}</td>
+				<td>{{listing.created_at | date:"MMM dd, yyyy 'at' h:mma"}}</td>
 				<td>
 					<button class="btn btn-info btn-xs" ng-click="openModal(listing)"><i class="fa fa-edit"></i></button>
 					<button class="btn btn-danger btn-xs" ng-click="removeListing(listing.id)"><i class="fa fa-trash"></i></button>
