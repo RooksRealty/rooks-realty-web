@@ -1,0 +1,22 @@
+<section>
+  <h2>Meet Our Agents</h2>
+
+  <div class="agents">
+    <div class="row cd-container">
+      <div class="col-md-offset-1 col-md-3 agent" ng-repeat="agent in agents">
+        <div class="panel panel-default">
+
+          <img ng-show="agent.avatar == null" ng-src="assets/no_image_male.jpg"/>
+          <img ng-hide="agent.avatar == null" ng-src="{{agent.avatar}}"/>
+
+          <h4 class="text-center">{{agent.name}}</h4>
+          
+          <div class="panel-footer text-center">
+            <i class="fa fa-envelope-o"></i> {{agent.email}} | <i class="fa fa-phone"></i> {{agent.phone_number}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

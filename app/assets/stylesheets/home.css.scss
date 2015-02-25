@@ -12,7 +12,7 @@ body, html, container {
 	
 	&.cd-bg-1 {
 	  background-image: url("huntsville.jpg");
-	  min-height: 350px;
+	  min-height: 250px;
 	}
 
 	form {
@@ -43,7 +43,7 @@ body, html, container {
 }
 
 .content {
-	padding: 30px;
+	padding-bottom: 30px;
 	margin: 0;
 }
 
@@ -56,6 +56,16 @@ section {
 
 		.social {
 			i {
+				color: #ffffff;
+			}
+		}
+
+		ul {
+			list-style-type: none;
+			padding: 0px;
+    		margin: 0px;
+
+			a {
 				color: #ffffff;
 			}
 		}

@@ -8,7 +8,7 @@
         <div ng-show="recent(listing)" class="ribbon ribbon-left">
           <p>New</p>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-default">
           
           <a href="#" ng-click="showListing()">
             <img ng-src="{{listing.avatar}}"/>
@@ -26,7 +26,7 @@
               Realtor: {{listing.realtor.name}}
             </p>
           </section>
-          <div class="panel-heading">
+          <div class="panel-footer">
             {{listing.bedrooms}} <i class="fa fa-bed"></i>
             | {{listing.bathrooms}} <img src='assets/shower.png' />
             | {{listing.sqft | number}} Sq Ft
