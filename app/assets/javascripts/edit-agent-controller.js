@@ -7,7 +7,9 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 		$scope.update = function () {
 			if($scope.agentForm.$valid) {
 				RealtorService.update($scope.realtor, function() {
-					$scope.upload($scope.temp_file, $scope.realtor.id);
+					if($scope.temp_file) {
+						$scope.upload($scope.temp_file, $scope.realtor.id);
+					}
 		            $modalInstance.close();
 		          }, function (error) {
 		            console.log(error);

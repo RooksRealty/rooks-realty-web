@@ -19,7 +19,9 @@ app.controller('EditListingController', ['$scope', '$modalInstance', 'Realtors',
 		$scope.update = function () {
 			if($scope.listingForm.$valid) {
 				ListingService.update($scope.listing, function() {
-					$scope.upload($scope.temp_file, $scope.listing.id);
+					if($scope.temp_file) {
+						$scope.upload($scope.temp_file, $scope.listing.id);
+					}
 		            $modalInstance.close();
 		          }, function (error) {
 		            console.log(error);
