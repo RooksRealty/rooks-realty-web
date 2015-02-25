@@ -9,4 +9,17 @@ class RealtorsController < ApplicationController
       format.to_json { render :json => @realtors.as_json }
     end
   end
+
+  def update
+    @realtor = Realtor.find(params[:id])
+    if @realtor.update(realtor_params)
+      render :nothing => true, status: :ok
+    end
+  end
+
+  private
+
+  def realtor_params
+  	params.require(:realtor).permit(:name, :email, :phone_number, :avatar)
+  end
 end

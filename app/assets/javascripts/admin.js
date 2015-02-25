@@ -7,12 +7,16 @@ app.config(["$httpProvider", function (provider) {
 app.config(['$routeProvider',
 	function($routeProvider) {
   		$routeProvider.
-		    when('/dashboard', {
+		    when('/dashboard/listings', {
 		      templateUrl: 'views/admin/listings/listings.html',
 		      controller: 'AdminController'
 		    }).
+		    when('/dashboard/agents', {
+		      templateUrl: 'views/admin/agents/agents.html',
+		      controller: 'AdminAgentController'
+		    }).
 		    otherwise({
-		      redirectTo: '/dashboard'
+		      redirectTo: '/dashboard/listings'
 		    });
 	}]);
 
@@ -25,6 +29,14 @@ app.factory('Listings', ['$resource', function ($resource) {
 
 app.factory('ListingService', ['$resource', function ($resource) {
     return $resource('/listings/:id.json', {}, {
+      show: { method: 'GET' },
+      update: { method: 'PUT', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
+      delete: { method: 'DELETE', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
+    });
+}]);
+
+app.factory('RealtorService', ['$resource', function ($resource) {
+    return $resource('/realtors/:id.json', {}, {
       show: { method: 'GET' },
       update: { method: 'PUT', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
       delete: { method: 'DELETE', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
@@ -174,3 +186,115 @@ app.controller('EditListingController', ['$scope', '$modalInstance', 'Realtors',
 		};
 
 }]);
+
+app.controller('NavController', ['$scope', '$location', function ($scope, $location) {
+	$scope.isActive = function (path) {
+	  return path === $location.path();
+	};
+}]);
+
+app.controller('AdminAgentController', ['$scope', '$modal', 'Realtors',
+	function ($scope, $modal, Realtors) {
+		$scope.orderByField = 'name';
+      	$scope.reverseSort = false;
+		$scope.loading = true;
+		$scope.currentPage = 1;
+  		$scope.numPerPage = 10;
+  		$scope.maxSize = 5;
+
+  		$scope.init = function () {
+			$scope.agents = Realtors.query(function () {
+				$scope.loading = false;
+
+				var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+			    var end = begin + $scope.numPerPage;
+			    
+			    $scope.filteredAgents = $scope.agents.slice(begin, end);
+			});
+		};
+
+		$scope.numPages = function () {
+		    return Math.ceil($scope.agents.length / $scope.numPerPage);
+		};
+		  
+		$scope.$watch('currentPage + numPerPage', function() {
+		    var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+		    var end = begin + $scope.numPerPage;
+		    
+		    if($scope.agents) {
+			    $scope.filteredAgents = $scope.agents.slice(begin, end);
+			}
+		});
+
+		$scope.columnFilter = function (name) {
+			$scope.orderByField = name; 
+			$scope.reverseSort = !$scope.reverseSort;
+		};
+
+		$scope.updateSortArrow = function (column) {
+			return {
+				'fa fa-sort':$scope.orderByField != column,
+				'fa fa-sort-up':!$scope.reverseSort && $scope.orderByField == column, 
+				'fa fa-sort-down':$scope.reverseSort && $scope.orderByField == column
+			};
+		};
+
+		$scope.openAgentModal = function (currentAgent) {
+      		var modalInstance = $modal.open({
+		      templateUrl: 'edit-agent.html',
+		      controller: 'EditAgentController',
+		      size: 'lg',
+		      resolve: {
+		        agent: function () {
+		          return currentAgent;
+		        }
+		      }
+		    });
+
+		    modalInstance.result.then(function (selectedItem) {
+		      $scope.selected = selectedItem;
+			  $scope.loading = true;
+		    }, function () {
+			  $scope.init();
+		    });
+      	};
+
+      	$scope.init();
+	}
+]);
+
+app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'agent', 'RealtorService',
+	function ($scope, $modalInstance, $upload, agent, RealtorService) {
+		$scope.realtor = agent;
+
+		$scope.update = function () {
+			if($scope.agentForm.$valid) {
+				RealtorService.update($scope.realtor, function() {
+					$scope.upload($scope.temp_file, $scope.realtor.id);
+		            $modalInstance.close();
+		          }, function (error) {
+		            console.log(error);
+		          });
+			}
+		};
+
+		$scope.cancel = function () {
+			$modalInstance.dismiss('cancel');
+		};
+
+		$scope.setFile = function (files) {
+			$scope.temp_file = files[0];
+		};
+
+		$scope.upload = function(file, id) {
+	      $scope.upload = $upload.upload({
+	          url: 'admin/realtor/image/upload/' + id + '.json', 
+	          file: file
+	      }).progress(function(evt) {
+	         console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+	      }).success(function(data, status, headers, config) {
+	         console.log(data);
+	      });
+		};
+	}
+]);

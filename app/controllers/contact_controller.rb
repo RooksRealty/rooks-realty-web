@@ -5,7 +5,7 @@ class ContactController < ApplicationController
 
   def contact
   	Emailer.submit_contact_message(contact_params).deliver
-	render :nothing => true, status: :ok
+	  render :nothing => true, status: :ok
   end
 
   private
