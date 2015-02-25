@@ -1,13 +1,13 @@
-<div ng-controller="AdminController">
+<div>
 
 <script type="text/ng-template" id="edit-listing.html">
     <div class="modal-header">
-        <button ng-show="listing != {}" class="btn btn-danger pull-right" ng-click="removeListing(listing.id)"><i class="fa fa-trash"></i></button>
-    	<h3 class="modal-title" ng-hide="listing == {}">Add New Listing</h3>
-        <h3 class="modal-title" ng-show="listing != {}">Edit Listing</h3>
+        <button ng-show="listing.id" class="btn btn-danger pull-right" ng-click="removeListing(listing.id)"><i class="fa fa-trash"></i></button>
+    	<h3 class="modal-title" ng-show="listing == {}">Add New Listing</h3>
+        <h3 class="modal-title" ng-hide="listing == {}">Edit Listing</h3>
     </div>
     <div class="modal-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" novalidate>
 		  <div class="form-group">
 		    <label for="mls" class="col-sm-2 control-label">MLS</label>
 		    <div class="col-sm-5">

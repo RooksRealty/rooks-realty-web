@@ -1,10 +1,10 @@
-<div ng-controller="AdminController">
+<div>
 
 <script type="text/ng-template" id="edit-agent.html">
     <div class="modal-header">
-        <button ng-show="realtor != {}" class="btn btn-danger pull-right" ng-click="removeAgent(realtor.id)"><i class="fa fa-trash"></i></button>
+        <button ng-show="realtor.id" class="btn btn-danger pull-right" ng-click="removeAgent(realtor.id)"><i class="fa fa-trash"></i></button>
     	<h3 class="modal-title" ng-show="realtor == {}">Add New Agent</h3>
-        <h3 class="modal-title" ng-show="realtor != {}">Edit Agent</h3>
+        <h3 class="modal-title" ng-hide="realtor == {}">Edit Agent</h3>
     </div>
     <div class="modal-body">
         <form class="form-horizontal" name="agentForm" novalidate>
@@ -44,7 +44,7 @@
 
 <div>
 
-	<button class="btn btn-primary" type="submit" ng-click="openAgentModal({})"><i class="fa fa-plus"></i> Add a Agent</button>
+	<button class="btn btn-primary" type="submit" ng-click="openModal({})"><i class="fa fa-plus"></i> Add a Agent</button>
 	<input type="text" ng-model="search" class="search-query form-control input-lg" placeholder="Search">
 
 	<div class="text-center" ng-show="loading">
@@ -73,7 +73,7 @@
 				<td>{{agent.email}}</td>
 				<td>{{agent.phone_number}}</td>
 				<td>
-					<button class="btn btn-info btn-xs" ng-click="openAgentModal(agent)"><i class="fa fa-edit"></i></button>
+					<button class="btn btn-info btn-xs" ng-click="openModal(agent)"><i class="fa fa-edit"></i></button>
 					<button class="btn btn-danger btn-xs" ng-click="removeAgent(agent.id)"><i class="fa fa-trash"></i></button>
 				</td>
 			</tr>

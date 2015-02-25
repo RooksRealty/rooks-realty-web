@@ -17,7 +17,7 @@
         <li ng-class="{active:isActive('/')}"><a href="#/">Home</a></li>
 
         <% if user_signed_in? %>
-          <li ng-class="{active:isActive('/dashboard')}"><a href="#/dashboard">Listings</a></li>
+          <li ng-class="{active:isActive('/dashboard/listings')}"><a href="#/dashboard/listings">Listings</a></li>
           <li ng-class="{active:isActive('/dashboard/agents')}"><a href="#/dashboard/agents">Agents</a></li>
         <% end %>
 
