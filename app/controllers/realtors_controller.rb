@@ -10,6 +10,17 @@ class RealtorsController < ApplicationController
     end
   end
 
+  def create
+    @realtor = Realtor.new(realtor_params)
+    @realtor.save
+
+    if @realtor
+      respond_with(@realtor) do |format|
+        format.to_json { @realtor.to_json }
+      end
+    end
+  end
+
   def update
     @realtor = Realtor.find(params[:id])
     if @realtor.update(realtor_params)

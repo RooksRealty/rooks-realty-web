@@ -46,7 +46,7 @@ app.factory('RealtorService', ['$resource', function ($resource) {
 app.factory('Realtors', ['$resource', function ($resource) {
 	return $resource('/realtors.json', {}, {
 	  query: { method: 'GET', isArray: true, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
-	  create: { method: 'POST' }
+	  create: { method: 'POST', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
 	});
 }]);
 
@@ -251,9 +251,9 @@ app.controller('AdminAgentController', ['$scope', '$modal', 'Realtors',
 		      }
 		    });
 
-		    modalInstance.result.then(function (selectedItem) {
-		      $scope.selected = selectedItem;
+		    modalInstance.result.then(function () {
 			  $scope.loading = true;
+			  $scope.init();
 		    }, function () {
 			  $scope.init();
 		    });
@@ -263,8 +263,8 @@ app.controller('AdminAgentController', ['$scope', '$modal', 'Realtors',
 	}
 ]);
 
-app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'agent', 'RealtorService',
-	function ($scope, $modalInstance, $upload, agent, RealtorService) {
+app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'agent', 'RealtorService', 'Realtors',
+	function ($scope, $modalInstance, $upload, agent, RealtorService, Realtors) {
 		$scope.realtor = agent;
 
 		$scope.update = function () {
@@ -275,6 +275,16 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 		          }, function (error) {
 		            console.log(error);
 		          });
+			}
+		};
+
+		$scope.create = function () {
+			if($scope.agentForm.$valid) {
+				Realtors.create({realtor: $scope.realtor}, function () {
+	              $modalInstance.close();
+	            }, function (error) {
+	              console.log(error);
+	            });
 			}
 		};
 
