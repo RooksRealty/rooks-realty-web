@@ -193,8 +193,8 @@ app.controller('NavController', ['$scope', '$location', function ($scope, $locat
 	};
 }]);
 
-app.controller('AdminAgentController', ['$scope', '$modal', 'Realtors',
-	function ($scope, $modal, Realtors) {
+app.controller('AdminAgentController', ['$scope', '$modal', 'Realtors', 'RealtorService',
+	function ($scope, $modal, Realtors, RealtorService) {
 		$scope.orderByField = 'name';
       	$scope.reverseSort = false;
 		$scope.loading = true;
@@ -237,6 +237,15 @@ app.controller('AdminAgentController', ['$scope', '$modal', 'Realtors',
 				'fa fa-sort-up':!$scope.reverseSort && $scope.orderByField == column, 
 				'fa fa-sort-down':$scope.reverseSort && $scope.orderByField == column
 			};
+		};
+
+		$scope.removeAgent = function (realtorId) {
+			var response = confirm("Are you sure you want to remove this agent?");
+			if (response == true) {
+			    RealtorService.delete({ id: realtorId }, function () {
+		        	$scope.init();
+		        });
+			}
 		};
 
 		$scope.openAgentModal = function (currentAgent) {
@@ -285,6 +294,15 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 	            }, function (error) {
 	              console.log(error);
 	            });
+			}
+		};
+
+		$scope.removeAgent = function (realtorId) {
+			var response = confirm("Are you sure you want to remove this agent?");
+			if (response == true) {
+			    RealtorService.delete({ id: realtorId }, function () {
+		        	$modalInstance.dismiss();
+		        });
 			}
 		};
 

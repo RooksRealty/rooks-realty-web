@@ -28,6 +28,12 @@ class RealtorsController < ApplicationController
     end
   end
 
+  def destroy
+    @realtor = Realtor.find(params[:id])
+    @realtor.destroy
+    respond_with(@realtor)
+  end
+
   private
 
   def realtor_params
