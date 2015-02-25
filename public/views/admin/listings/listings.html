@@ -2,7 +2,7 @@
 
 <script type="text/ng-template" id="edit-listing.html">
     <div class="modal-header">
-        <button class="btn btn-danger pull-right" ng-click="removeListing(listing.id)"><i class="fa fa-trash"></i></button>
+        <button ng-show="listing" class="btn btn-danger pull-right" ng-click="removeListing(listing.id)"><i class="fa fa-trash"></i></button>
     	<h3 class="modal-title" ng-hide="listing">Add New Listing</h3>
         <h3 class="modal-title" ng-show="listing">Edit Listing</h3>
     </div>
@@ -93,8 +93,8 @@
     </div>
 </script>
 
-<div class="loading" ng-show="loading">
-	<img src="assets/loading.gif"/>
+<div class="text-center" ng-show="loading">
+	<i class="fa fa-spinner fa-pulse fa-5x"></i>
 	<p>Loading...</p>
 </div>
 
