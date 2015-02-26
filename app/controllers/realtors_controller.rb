@@ -10,6 +10,13 @@ class RealtorsController < ApplicationController
     end
   end
 
+  def show
+    @realtor = Realtor.find(params[:id])
+    respond_with(@realtor) do |format|
+      format.to_json { @realtor.to_json(:include => :listings) }
+    end
+  end
+
   def create
     @realtor = Realtor.new(realtor_params)
     @realtor.save

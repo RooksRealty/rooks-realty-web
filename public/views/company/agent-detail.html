@@ -1,0 +1,37 @@
+<div class="agent-detail">
+	<div class="col-md-offset-2 col-md-4">
+		<img class="full" ng-src="{{agent.avatar}}"/>
+	</div>
+
+	<div class="col-md-4">
+		<h2>{{agent.name}}</h2>
+
+		<p>Email: {{agent.email}}</p>
+		<p>Phone: {{agent.phone_number}}</p>
+	</div>
+
+	<div class="col-md-offset-2 col-md-8 agent-listings">
+		<h3>Listings</h3>
+
+		<div ng-repeat="listing in agent.listings">
+			<!-- <img class="thumb" ng-src="system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/> -->
+			MLS #: {{listing.mls}}<br><br>
+
+			{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}<br><br>
+
+			<h4>{{listing.price | currency:"$":0 }}</h4><br>
+			
+			<div class="left">
+				Bedrooms: {{listing.bedrooms}}<br>
+				Bathrooms: {{listing.bathrooms}}<br>
+				Garages: {{listing.garages}}<br>
+			</div>
+			<div class="right">
+				Acres: {{listing.acres | number}}<br>
+				Sqft: {{listing.sqft}}<br>
+			</div>
+
+			<hr>
+		</div>
+	</div>
+</div>

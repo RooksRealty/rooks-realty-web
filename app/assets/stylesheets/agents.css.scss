@@ -6,3 +6,38 @@
 		}
 	}
 }
+
+.agent-detail {
+	img {
+	    &.full {
+	      width: 300px;
+	      height: auto;
+	    }
+
+	    &.thumb {
+	      width: 100px;
+	      height: auto;
+	    }
+	}
+
+	.agent-listings {
+		h3 {
+			border-bottom: 2px solid #000;
+		}
+
+		.left {
+			float: left;
+			width: 45%;
+		}
+
+		.right {
+			float: right;
+			width: 45%;
+		}
+
+		hr {
+			clear: both;
+			margin-top: 5px;
+		}
+	}
+}

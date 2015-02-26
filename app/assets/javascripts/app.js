@@ -9,7 +9,11 @@
         }).
         when('/agents', {
           templateUrl: 'views/company/agents.html',
-          controller: 'AgentController'
+          controller: 'AgentsController'
+        }).
+        when('/agents/:id', {
+          templateUrl: 'views/company/agent-detail.html',
+          controller: 'AgentDetailController'
         }).
         when('/about', {
           templateUrl: 'views/company/about.html',
@@ -58,10 +62,17 @@
 		}
 	]);
 
-  app.controller('AgentController', ['$scope', 'Realtors', 
+  app.controller('AgentsController', ['$scope', 'Realtors', 
     function ($scope, Realtors) {
       window.scrollTo(0, 0);
       $scope.agents = Realtors.query();
+    }
+  ]);
+
+  app.controller('AgentDetailController', ['$scope', '$routeParams', 'RealtorService',
+    function ($scope, $routeParams, RealtorService) {
+      window.scrollTo(0, 0);
+      $scope.agent = RealtorService.show({id: $routeParams.id});
     }
   ]);
 
