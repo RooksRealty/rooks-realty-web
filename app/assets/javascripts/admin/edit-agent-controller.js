@@ -1,4 +1,4 @@
-var app = angular.module('editAgent',['ui.bootstrap', 'angularFileUpload', 'adminServices']);
+var app = angular.module('editAgent',['ui.bootstrap', 'angularFileUpload', 'services']);
 
 app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'agent', 'RealtorService', 'Realtors',
 	function ($scope, $modalInstance, $upload, agent, RealtorService, Realtors) {

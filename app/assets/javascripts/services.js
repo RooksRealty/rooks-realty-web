@@ -1,4 +1,4 @@
-var app = angular.module('adminServices', ['ngResource', 'ngRoute']);
+var app = angular.module('services', ['ngResource', 'ngRoute']);
 
 app.config(["$httpProvider", function (provider) {
     provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
@@ -32,4 +32,11 @@ app.factory('Realtors', ['$resource', function ($resource) {
 	  query: { method: 'GET', isArray: true, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
 	  create: { method: 'POST', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
 	});
+}]);
+
+
+app.factory('EmailService', ['$resource', function ($resource) {
+  return $resource('/contact', {}, {
+    sendEmail: { method: 'POST', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
+  });
 }]);

@@ -1,4 +1,4 @@
-  var app = angular.module('rooksRealty',['ngResource', 'ngRoute']);
+  var app = angular.module('rooksRealty',['ngResource', 'ngRoute', 'services', 'admin']);
 
   app.config(['$routeProvider',
     function($routeProvider) {
@@ -19,35 +19,15 @@
           templateUrl: 'views/company/contact.html',
           controller: 'ContactController'
         }).
+        when('/listings/:id', {
+          templateUrl: 'views/listings/listing-detail.html',
+          controller: 'ListingDetailController'
+        }).
         otherwise({
           redirectTo: '/'
         });
     }]);
 
-	app.config(["$httpProvider", function (provider) {
-    provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
-  }]);
-
-  app.factory('Listings', ['$resource', function ($resource) {
-    return $resource('/listings.json', {}, {
-      query: { method: 'GET', isArray: true, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
-      create: { method: 'POST' }
-    });
-	}]);
-
-
-  app.factory('Realtors', ['$resource', function ($resource) {
-    return $resource('/realtors.json', {}, {
-      query: { method: 'GET', isArray: true, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
-      create: { method: 'POST' }
-    });
-  }]);
-
-  app.factory('EmailService', ['$resource', function ($resource) {
-    return $resource('/contact', {}, {
-      sendEmail: { method: 'POST', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
-    });
-  }]);
 
   app.controller('NavController', ['$scope', '$location', function ($scope, $location) {
     $scope.isActive = function (path) {
@@ -55,8 +35,12 @@
     };
   }]);
 
-	app.controller('HomeController', ['$scope', '$resource', 'Listings',
-		function ($scope, $resource, Listings) {
+	app.controller('HomeController', ['$scope', '$resource', 'Listings', '$location',
+		function ($scope, $resource, Listings, $location) {
+
+      $scope.isAdminPortal = function () {
+        return $location.url().indexOf('admin') >= 0;
+      };
 
       window.scrollTo(0, 0);
 			$scope.listings = Listings.query();
@@ -67,25 +51,8 @@
         return ((new Date) - created_at) < ONE_WEEK;
       }
 
-      $scope.showListing = function () {
-        // var modalInstance = $modal.open({
-        //   templateUrl: 'views/listings/listing-detail.html',
-        //   controller: 'ListingController',
-        //   size: 'lg',
-        //   backdrop: 'static',
-        //   resolve: {
-        //     listing: function () {
-        //       return {};
-        //     }
-        //   }
-        // });
-
-        // modalInstance.result.then(function (data) {
-        //   console.log(data);
-        //   $location.url('/');
-        // }, function () {
-
-        // });
+      $scope.showListing = function (listingId) {
+        $location.url('/listings/' + listingId)
       };
 
 		}
@@ -139,4 +106,11 @@
               contactForm.email.$untouched || contactForm.message.$untouched;
       };
     }
+  ]);
+
+  app.controller('ListingDetailController', ['$scope', 'listingId', 'ListingsService',
+    function ($scope, listingId, ListingsService) {
+      $scope.listing = ListingsService.show(listingId);
+    }
+
   ]);

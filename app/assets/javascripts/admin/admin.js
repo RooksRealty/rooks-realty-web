@@ -1,19 +1,19 @@
-var app = angular.module('rooksRealtyAdmin',['ngResource', 'ngRoute', 'ui.bootstrap', 'angularFileUpload', 
-		'adminServices', 'editListing', 'editAgent', 'adminListings', 'adminAgents']);
+var app = angular.module('admin',
+	['ngResource', 'ngRoute', 'editListing', 'editAgent', 'adminListings', 'adminAgents']);
 
 app.config(['$routeProvider',
 	function($routeProvider) {
   		$routeProvider.
-		    when('/dashboard/listings', {
+		    when('/admin/dashboard/listings', {
 		      templateUrl: 'views/admin/listings/listings.html',
 		      controller: 'AdminListingsController'
 		    }).
-		    when('/dashboard/agents', {
+		    when('/admin/dashboard/agents', {
 		      templateUrl: 'views/admin/agents/agents.html',
 		      controller: 'AdminAgentsController'
 		    }).
 		    otherwise({
-		      redirectTo: '/dashboard/listings'
+		      redirectTo: '/admin/dashboard/listings'
 		    });
 	}]);
 
