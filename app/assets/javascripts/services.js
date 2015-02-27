@@ -13,7 +13,7 @@ app.factory('Listings', ['$resource', function ($resource) {
 
 app.factory('ListingService', ['$resource', function ($resource) {
     return $resource('/listings/:id.json', {}, {
-      show: { method: 'GET' },
+      show: { method: 'GET', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
       update: { method: 'PUT', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
       delete: { method: 'DELETE', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
     });

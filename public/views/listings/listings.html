@@ -2,7 +2,12 @@
   <section>
   <h2>Listings</h2>
 
-  <div class="listings cd-scrolling-bg cd-color-2" ng-controller='HomeController'>
+  <div class="text-center" ng-show="loading">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+    <div class="text-center">Loading</div>
+  </div>
+
+  <div ng-hide="loading" class="listings cd-scrolling-bg cd-color-2" ng-controller='HomeController'>
     <div class="row cd-container">
       <div class="col-md-3 listing" ng-repeat="listing in listings">
         <div ng-show="recent(listing)" class="ribbon ribbon-left">
@@ -10,7 +15,7 @@
         </div>
         <div class="panel panel-default">
           
-          <a href="#" ng-click="showListing(listing.id)">
+          <a href="#/listings/{{listing.id}}">
             <img ng-src="{{listing.avatar}}"/>
           </a>
 

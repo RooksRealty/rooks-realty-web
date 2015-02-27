@@ -42,21 +42,20 @@
 	app.controller('HomeController', ['$scope', '$resource', 'Listings', '$location',
 		function ($scope, $resource, Listings, $location) {
 
+      window.scrollTo(0, 0);
+      $scope.loading = true;
+			$scope.listings = Listings.query(function () {
+        $scope.loading = false;
+      });
+
       $scope.isAdminPortal = function () {
         return $location.url().indexOf('admin') >= 0;
       };
-
-      window.scrollTo(0, 0);
-			$scope.listings = Listings.query();
 
       $scope.recent = function (listing) {
         var created_at = new Date(listing.created_at);
         var ONE_WEEK = 60*60*24*7*1000;
         return ((new Date) - created_at) < ONE_WEEK;
-      }
-
-      $scope.showListing = function (listingId) {
-        $location.url('/listings/' + listingId)
       };
 
 		}
@@ -119,9 +118,33 @@
     }
   ]);
 
-  app.controller('ListingDetailController', ['$scope', 'listingId', 'ListingsService',
-    function ($scope, listingId, ListingsService) {
-      $scope.listing = ListingsService.show(listingId);
+  app.controller('ListingDetailController', ['$scope', '$routeParams', 'ListingService',
+    function ($scope, $routeParams, ListingService) {
+      var map;
+
+      $scope.listing = ListingService.show({id: $routeParams.id}, function () {
+        
+        var mapOptions = {
+          zoom: 17
+        };
+
+        $scope.searchAddress = $scope.listing.address + "," + $scope.listing.city + "," + $scope.listing.zip_code;
+
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': $scope.searchAddress}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+          } else {
+            console.log('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      });
     }
 
   ]);

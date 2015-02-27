@@ -3,7 +3,7 @@
 
   <div class="agents">
     <div class="row cd-container">
-      <div class="col-md-offset-1 col-md-3 agent" ng-repeat="agent in agents">
+      <div class="col-md-4 agent" ng-repeat="agent in agents">
         <div class="panel panel-default">
 
           <a href="#/agents/{{agent.id}}"><img ng-src="{{agent.avatar}}"/></a>
@@ -11,7 +11,8 @@
           <h4 class="text-center">{{agent.name}}</h4>
           
           <div class="panel-footer text-center">
-            <i class="fa fa-envelope-o"></i> {{agent.email}} | <i class="fa fa-phone"></i> {{agent.phone_number}}
+            <i class="fa fa-envelope-o"></i> {{agent.email}}<br>
+            <i class="fa fa-phone"></i> {{agent.phone_number}}
           </div>
         </div>
       </div>

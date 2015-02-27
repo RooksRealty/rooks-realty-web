@@ -1,26 +1,5 @@
 body { 
   background-color: #fff; color: #333; 
-
-  form {
-    .form-group {
-      input.form-control {
-        font-family: Arial, Helvetica, sans-serif;
-        color: #000;
-      }
-    }
-  }
-
-  img {
-    &.full {
-      width: 300px;
-      height: auto;
-    }
-
-    &.thumb {
-      width: 100px;
-      height: auto;
-    }
-  }
 }
 
 body, p, ol, ul, td {
