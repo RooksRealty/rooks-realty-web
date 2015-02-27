@@ -1,4 +1,4 @@
-var app = angular.module('editListing',['ui.bootstrap', 'angularFileUpload', 'services']);
+var app = angular.module('editListing',['ui.bootstrap', 'services']);
 
 app.controller('EditListingController', ['$scope', '$modalInstance', 'Realtors', 'Listings', 'ListingService', 'listing', '$upload',
 	function ($scope, $modalInstance, Realtors, Listings, ListingService, listing, $upload) {

@@ -16,6 +16,4 @@
 //= require angular-resource/angular-resource
 //= require angular-route/angular-route
 //= require angular-bootstrap
-//= require ng-file-upload-shim
-//= require ng-file-upload
 //= require_tree .
