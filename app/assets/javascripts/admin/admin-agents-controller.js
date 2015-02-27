@@ -1,4 +1,4 @@
-var app = angular.module('adminAgents',['ui.bootstrap', 'services']);
+var app = angular.module('adminAgents',['ui.bootstrap', 'angularFileUpload', 'services']);
 
 app.controller('AdminAgentsController', ['$scope', '$modal', 'Realtors', 'RealtorService',
 	function ($scope, $modal, Realtors, RealtorService) {

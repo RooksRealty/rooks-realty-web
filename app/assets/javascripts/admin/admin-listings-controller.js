@@ -1,4 +1,4 @@
-var app = angular.module('adminListings', ['ui.bootstrap', 'services']);
+var app = angular.module('adminListings', ['ui.bootstrap', 'angularFileUpload', 'services']);
 
 app.controller('AdminListingsController', ['$scope', '$resource', 'Listings', 'ListingService', '$modal',
 	function ($scope, $resource, Listings, ListingService, $modal) {
