@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   post 'contact' => 'contact#contact'
 
   get 'admin' => 'admin#index'
-  post 'admin/listing/image/upload/:id' => 'admin#listing_image_upload'
-  post 'admin/realtor/image/upload/:id' => 'admin#realtor_image_upload'
+  post '/listing/image/upload/:id' => 'upload#listing_image_upload'
+  post '/realtor/image/upload/:id' => 'upload#realtor_image_upload'
 end

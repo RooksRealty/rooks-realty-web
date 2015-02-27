@@ -4,16 +4,16 @@ var app = angular.module('admin',
 app.config(['$routeProvider',
 	function($routeProvider) {
   		$routeProvider.
-		    when('/admin/dashboard/listings', {
+		    when('/dashboard/listings', {
 		      templateUrl: 'views/admin/listings/listings.html',
 		      controller: 'AdminListingsController'
 		    }).
-		    when('/admin/dashboard/agents', {
+		    when('/dashboard/agents', {
 		      templateUrl: 'views/admin/agents/agents.html',
 		      controller: 'AdminAgentsController'
 		    }).
 		    otherwise({
-		      redirectTo: '/admin/dashboard/listings'
+		      redirectTo: '/dashboard/listings'
 		    });
 	}]);
 

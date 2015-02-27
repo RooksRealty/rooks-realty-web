@@ -50,7 +50,7 @@ app.controller('EditListingController', ['$scope', '$modalInstance', 'Realtors',
 		  // for (var i = 0; i < $files.length; i++) {
 		      // var file = $files[i];
 		      $scope.upload = $upload.upload({
-		          url: 'admin/listing/image/upload/' + id + '.json', 
+		          url: 'listing/image/upload/' + id + '.json',
 		          file: file
 		      }).progress(function(evt) {
 		         console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));

@@ -10,7 +10,6 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 					if($scope.temp_file) {
 						$scope.upload($scope.temp_file, $scope.realtor.id);
 					}
-		            $modalInstance.close();
 		          }, function (error) {
 		            console.log(error);
 		          });
@@ -46,12 +45,13 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 
 		$scope.upload = function(file, id) {
 	      $scope.upload = $upload.upload({
-	          url: 'admin/realtor/image/upload/' + id + '.json', 
+	          url: 'realtor/image/upload/' + id + '.json',
 	          file: file
 	      }).progress(function(evt) {
 	         console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 	      }).success(function(data, status, headers, config) {
 	         console.log(data);
+             $modalInstance.close();
 	      });
 		};
 	}
