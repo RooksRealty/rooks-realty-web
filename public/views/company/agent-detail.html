@@ -6,29 +6,33 @@
 	<div class="col-md-4">
 		<h2>{{agent.name}}</h2>
 
-		<p><i class="fa fa-envelope-o"></i> {{agent.email}}</p>
-		<p><i class="fa fa-phone"></i> {{agent.phone_number}}</p>
+		<p><i class="fa fa-envelope-o"></i> <a href="mailto:{{agent.email}}">{{agent.email}}</a></p>
+		<p><i class="fa fa-phone"></i> <a href="tel:{{agent.phone_number}}">{{agent.phone_number}}</a></p>
 	</div>
 
 	<div class="col-md-offset-2 col-md-8 agent-listings">
 		<h3>Listings</h3>
 
 		<div ng-repeat="listing in agent.listings">
-			<!-- <img class="thumb" ng-src="system/listings/avatars/000/000/00{{listing.id}}/thumb/{{listing.avatar_file_name}}"/> -->
-			MLS #: {{listing.mls}}<br><br>
+			<a href="#/listings/{{listing.id}}"><img class="thumb left" ng-src="system/listings/avatars/000/000/{{listing.id | numberFixedLen:3 }}/thumb/{{listing.avatar_file_name}}" err-src="assets/no_image_available.gif"/></a>
 
-			{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}<br><br>
+			<address class="right">
+				{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}
+			</address>
 
-			<h4>{{listing.price | currency:"$":0 }}</h4><br>
+			<div class="clear"></div>
+			<strong>MLS #: {{listing.mls}}</strong><br><br>
+
+			<h2>{{listing.price | currency:"$":0 }}</h2><br>
 			
 			<div class="left">
-				Bedrooms: {{listing.bedrooms}}<br>
-				Bathrooms: {{listing.bathrooms}}<br>
-				Garages: {{listing.garages}}<br>
+				Bedrooms: <span ng-class="{empty:!listing.bedrooms}">{{listing.bedrooms}}</span><br>
+				Bathrooms: <span ng-class="{empty:!listing.bathrooms}">{{listing.bathrooms}}</span><br>
+				Garages: <span ng-class="{empty:!listing.garages}">{{listing.garages}}</span><br>
 			</div>
 			<div class="right">
-				Acres: {{listing.acres | number}}<br>
-				Sqft: {{listing.sqft}}<br>
+				Acres: <span ng-class="{empty:!listing.acres}">{{listing.acres | number}}</span><br>
+				Sqft: <span ng-class="{empty:!listing.sqft}">{{listing.sqft}}</span><br>
 			</div>
 
 			<hr>

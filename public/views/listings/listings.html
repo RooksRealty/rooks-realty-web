@@ -8,7 +8,7 @@
   </div>
 
   <div ng-hide="loading" class="listings cd-scrolling-bg cd-color-2" ng-controller='HomeController'>
-    <div class="row cd-container">
+    <div class="row-fluid cd-container">
       <div class="col-md-3 listing" ng-repeat="listing in listings">
         <div ng-show="recent(listing)" class="ribbon ribbon-left">
           <p>New</p>
@@ -32,10 +32,10 @@
             </p>
           </section>
           <div class="panel-footer">
-            {{listing.bedrooms}} <i class="fa fa-bed"></i>
-            | {{listing.bathrooms}} <img src='assets/shower.png' />
-            | {{listing.sqft | number}} Sq Ft
-            <span ng-show="listing.acres">| {{listing.acres | number}} Acres</span>
+            <span ng-show='lisitng.bedrooms'>{{listing.bedrooms}} <i class="fa fa-bed"></i> | </span>
+            <span ng-show='lisitng.bathrooms'>{{listing.bathrooms}} <img src='assets/shower.png' /> | </span>
+            <span ng-show='lisitng.sqft'>{{listing.sqft | number}} Sq Ft | </span>
+            <span ng-show="listing.acres">{{listing.acres | number}} Acres</span>
           </div>
         </div>
       </div>

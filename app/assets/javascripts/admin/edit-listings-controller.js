@@ -5,6 +5,8 @@ app.controller('EditListingController', ['$scope', '$modalInstance', 'Realtors',
 		$scope.realtors = Realtors.query();
 		$scope.listing = listing;
 		window.scope = $scope;
+		$scope.showAlert = false;
+		$scope.alert = { msg: '' };
 
 		$scope.create = function () {
 			if($scope.listingForm.$valid) {
@@ -13,6 +15,9 @@ app.controller('EditListingController', ['$scope', '$modalInstance', 'Realtors',
 	            }, function (error) {
 	              console.log(error);
 	            });
+			} else {
+				$scope.alert.msg = 'This form is not valid. Please fill in the required fields.'
+				$scope.showAlert = true;
 			}
 		};
 
@@ -26,6 +31,9 @@ app.controller('EditListingController', ['$scope', '$modalInstance', 'Realtors',
 		          }, function (error) {
 		            console.log(error);
 		          });
+			} else {
+				$scope.alert.msg = 'This form is not valid. Please fill in the required fields.'
+				$scope.showAlert = true;
 			}
 		};
 

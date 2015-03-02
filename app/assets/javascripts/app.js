@@ -1,4 +1,4 @@
-  var app = angular.module('rooksRealty',['ngResource', 'ngRoute', 'services', 'admin']);
+  var app = angular.module('rooksRealty',['ngResource', 'ngRoute', 'services', 'admin', 'helpers']);
 
   app.config(['$routeProvider',
     function($routeProvider) {
@@ -122,6 +122,8 @@
     function ($scope, $routeParams, ListingService) {
       var map;
 
+      window.scrollTo(0, 0);
+      
       $scope.listing = ListingService.show({id: $routeParams.id}, function () {
         
         var mapOptions = {

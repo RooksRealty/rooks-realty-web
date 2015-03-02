@@ -6,35 +6,39 @@
 			display: block;
 			margin: auto;
 		}
+
+		.panel {
+			header {
+				background-position: center;
+				background-size: auto 100%;
+				background-repeat: no-repeat;
+				height: 350px;
+				background-color: #888;
+			}
+
+			.panel-footer {
+				color: #ffffff;
+				height: 65px;
+				max-height: 65px;
+				min-height: 65px;
+
+				a {
+					color: #ffffff;
+
+					&::hover, &::active {
+						color: #ffffff;
+					}
+				}
+			}
+		}
 	}
 }
 
 .agent-detail {
-	img {
-	    &.full {
-	      width: 300px;
-	      height: auto;
-	    }
-
-	    &.thumb {
-	      width: 100px;
-	      height: auto;
-	    }
-	}
 
 	.agent-listings {
 		h3 {
 			border-bottom: 2px solid #000;
-		}
-
-		.left {
-			float: left;
-			width: 45%;
-		}
-
-		.right {
-			float: right;
-			width: 45%;
 		}
 
 		hr {

@@ -7,27 +7,29 @@
         <h3 class="modal-title" ng-hide="listing == {}">Edit Listing</h3>
     </div>
     <div class="modal-body">
-        <form class="form-horizontal" novalidate>
-		  <div class="form-group">
-		    <label for="mls" class="col-sm-2 control-label">MLS</label>
+    	<alert ng-show="showAlert" ng-model="alert" type="danger">{{alert.msg}}</alert>
+
+        <form class="form-horizontal" name='listingForm' novalidate>
+		  <div class="form-group" ng-class="{'has-error': listingForm.mls.$touched && listingForm.mls.$invalid}">
+		    <label for="mls" class="col-sm-2 control-label">MLS *</label>
 		    <div class="col-sm-5">
-		      <input type="number" class="form-control" id="mls" ng-model="listing.mls" placeholder="MLS #" required>
+		      <input type="number" class="form-control" name="mls" id="mls" ng-model="listing.mls" placeholder="MLS #" required>
 		    </div>
 		  </div>
-		  <div class="form-group">
-		    <label for="address" class="col-sm-2 control-label">Address</label>
+		  <div class="form-group" ng-class="{'has-error': listingForm.address.$touched && listingForm.address.$invalid}">
+		    <label for="address" class="col-sm-2 control-label">Address *</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="address" ng-model="listing.address" placeholder="e.g. 3579 Market St.">
+		      <input type="text" class="form-control" name="address" id="address" ng-model="listing.address" placeholder="e.g. 3579 Market St." required>
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="city" class="col-sm-2 control-label">City</label>
-		    <div class="col-sm-3">
-		      <input type="text" class="form-control" ng-model="listing.city" id="city">
+		    <label for="city" class="col-sm-2 control-label">City *</label>
+		    <div class="col-sm-3" ng-class="{'has-error': listingForm.city.$touched && listingForm.city.$invalid}">
+		      <input type="text" class="form-control" name="city" ng-model="listing.city" id="city" required>
 		    </div>
-		    <label for="state" class="col-sm-1 control-label">State</label>
-		    <div class="col-sm-2">
-		      	<select class="form-control" ng-model="listing.state">
+		    <label for="state" class="col-sm-1 control-label">State *</label>
+		    <div class="col-sm-2" ng-class="{'has-error': listingForm.state.$touched && listingForm.state.$invalid}">
+		      	<select class="form-control" ng-model="listing.state" name="state" required>
 		      	  <option></option>
 				  <option>AL</option>
 				  <option>GA</option>
@@ -37,14 +39,14 @@
 		    </div>
 		    <label for="zipcode" class="col-sm-2 control-label">Zip Code</label>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="zipcode" ng-model="listing.zipcode" required>
+		      <input type="text" class="form-control" id="zipcode" name="zipcode" ng-model="listing.zipcode" required>
 		    </div>
 		  </div>
-		  <div class="form-group">
-		    <label for="price" class="col-sm-2 control-label">Price</label>
+		  <div class="form-group" ng-class="{'has-error': listingForm.price.$touched && listingForm.price.$invalid}">
+		    <label for="price" class="col-sm-2 control-label">Price *</label>
 		    <div class="col-sm-3 input-group" style="padding-left: 14px;">
 		      <span class="input-group-addon">$</span>
-			  <input type="number" class="form-control" id="price" ng-model="listing.price" aria-label="Amount (to the nearest dollar)" required>
+			  <input type="number" class="form-control" name="price" id="price" ng-model="listing.price" aria-label="Amount (to the nearest dollar)" required>
 			  <span class="input-group-addon">.00</span>
 		    </div>
 		  </div>
@@ -68,10 +70,10 @@
 		      <input type="number" class="form-control" id="sqft" ng-model="listing.sqft">
 		    </div>
 		  </div>
-		  <div class="form-group">
-		    <label for="realtor" class="col-sm-2 control-label">Realtor</label>
+		  <div class="form-group" ng-class="{'has-error': listingForm.realtor.$touched && listingForm.realtor.$invalid}">
+		    <label for="realtor" class="col-sm-2 control-label">Realtor *</label>
 		    <div class="col-sm-5">
-		      	<select class="form-control" id="realtor" ng-model="listing.realtor.name" required>
+		      	<select class="form-control" id="realtor" name="realtor" ng-model="listing.realtor.name" required>
 		      	  <option></option>
 				  <option ng-repeat="realtor in realtors" value="{{realtor.id}}">{{realtor.name}}</option>
 				</select>
@@ -130,11 +132,11 @@
 				<td>{{listing.mls}}</td>
 				<td>{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}</td>
 				<td>{{listing.price | currency:"$":0 }}</td>
-				<td>{{listing.acres | number}}</td>
-				<td>{{listing.bedrooms}}</td>
-				<td>{{listing.bathrooms}}</td>
-				<td>{{listing.garages}}</td>
-				<td>{{listing.sqft}}</td>
+				<td ng-class="{empty:!listing.acres}">{{listing.acres | number}}</td>
+				<td ng-class="{empty:!listing.bedrooms}">{{listing.bedrooms}}</td>
+				<td ng-class="{empty:!listing.bathrooms}">{{listing.bathrooms}}</td>
+				<td ng-class="{empty:!listing.garages}">{{listing.garages}}</td>
+				<td ng-class="{empty:!listing.sqft}">{{listing.sqft}}</td>
 				<td>{{listing.realtor.name}}</td>
 				<td>{{listing.created_at | date:"MMM dd, yyyy 'at' h:mma"}}</td>
 				<td>

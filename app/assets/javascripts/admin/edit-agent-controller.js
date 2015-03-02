@@ -29,6 +29,9 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 	            }, function (error) {
 	              console.log(error);
 	            });
+			} else {
+				$scope.alert.msg = 'This form is not valid. Please fill in the required fields.'
+				$scope.showAlert = true;
 			}
 		};
 

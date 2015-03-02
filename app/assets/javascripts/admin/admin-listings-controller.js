@@ -70,6 +70,7 @@ app.controller('AdminListingsController', ['$scope', '$resource', 'Listings', 'L
 		    modalInstance.result.then(function (selectedItem) {
 		      $scope.selected = selectedItem;
 			  $scope.loading = true;
+			  $scope.init();
 		    }, function () {
 			  $scope.init();
 		    });
