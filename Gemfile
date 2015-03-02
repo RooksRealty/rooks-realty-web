@@ -12,7 +12,6 @@ gem "foreman"
 gem 'nokogiri'
 gem 'paperclip'
 gem 'devise'
-gem 'font-awesome-sass'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
