@@ -54,5 +54,17 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
              $modalInstance.close();
 	      });
 		};
+
+		$scope.formatPhoneNumber = function(phoneNumber) {
+			if(phoneNumber) {
+				var numbers = phoneNumber.replace(/\D/g, ''),
+			        char = {0:'(',3:') ',6:'-'};
+			    phoneNumber = '';
+			    for (var i = 0; i < numbers.length; i++) {
+			        phoneNumber += (char[i]||'') + numbers[i];
+			    }
+			    $scope.realtor.phone_number = phoneNumber;
+			}
+		};
 	}
 ]);
