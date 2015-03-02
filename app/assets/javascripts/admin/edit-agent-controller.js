@@ -3,6 +3,8 @@ var app = angular.module('editAgent',['ui.bootstrap', 'angularFileUpload', 'serv
 app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'agent', 'RealtorService', 'Realtors',
 	function ($scope, $modalInstance, $upload, agent, RealtorService, Realtors) {
 		$scope.realtor = agent;
+		$scope.showAlert = false;
+		$scope.alert = { msg: '' };
 
 		$scope.update = function () {
 			if($scope.agentForm.$valid) {
@@ -10,9 +12,13 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 					if($scope.temp_file) {
 						$scope.upload($scope.temp_file, $scope.realtor.id);
 					}
+             		$modalInstance.close();
 		          }, function (error) {
 		            console.log(error);
 		          });
+			} else {
+				$scope.alert.msg = 'This form is not valid. Please fill in the required fields.'
+				$scope.showAlert = true;
 			}
 		};
 
@@ -51,7 +57,6 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 	         console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 	      }).success(function(data, status, headers, config) {
 	         console.log(data);
-             $modalInstance.close();
 	      });
 		};
 
