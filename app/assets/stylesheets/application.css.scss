@@ -97,6 +97,16 @@
       content: '--';
     }
   }
+
+  footer {
+    a {
+      color: #ffffff;
+
+      &::hover, &::active {
+        color: #ffffff;
+      }
+    }
+  }
 }
 
 html, body, #map-canvas { height: 300px; margin: 0; padding: 0;}
