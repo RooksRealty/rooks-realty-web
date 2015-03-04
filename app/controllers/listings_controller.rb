@@ -29,7 +29,7 @@ class ListingsController < ApplicationController
     @listing.save
 
     if @listing
-      @listing.realtor = Realtor.find(params[:listing][:realtor][:name]) if params[:listing][:realtor].present?
+      @listing.realtor = Realtor.find_by_name(params[:listing][:realtor][:name]) if params[:listing][:realtor].present?
       @listing.save!
 
       respond_with(@listing) do |format|
@@ -41,7 +41,7 @@ class ListingsController < ApplicationController
   def update
     @listing = Listing.find(params[:id])
     if @listing.update(listing_params)
-      @listing.realtor = Realtor.find(params[:realtor][:name]) if params[:realtor].present?
+      @listing.realtor = Realtor.find_by_name(params[:realtor][:name]) if params[:realtor].present?
       @listing.save!
 
       respond_with(@listing) do |format|

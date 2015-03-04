@@ -69,14 +69,15 @@
 		    <div class="col-sm-2">
 		      <input type="number" class="form-control" id="sqft" ng-model="listing.sqft">
 		    </div>
+		    <label for="acres" class="col-sm-2 control-label">Acres</label>
+		    <div class="col-sm-2">
+		      <input type="number" class="form-control" id="acres" ng-model="listing.acres">
+		    </div>
 		  </div>
 		  <div class="form-group" ng-class="{'has-error': listingForm.realtor.$touched && listingForm.realtor.$invalid}">
-		    <label for="realtor" class="col-sm-2 control-label">Realtor *</label>
+		    <label for="realtor" class="col-sm-2 control-label">Realtor *</label>	
 		    <div class="col-sm-5">
-		      	<select class="form-control" id="realtor" name="realtor" ng-model="listing.realtor.name" required>
-		      	  <option></option>
-				  <option ng-repeat="realtor in realtors" value="{{realtor.id}}">{{realtor.name}}</option>
-				</select>
+		    	<select class="form-control" id="realtor" name="realtor" ng-model="listing.realtor" ng-options="realtor.name for realtor in realtors">
 		    </div>
 		  </div>
 		  <div class="form-group">

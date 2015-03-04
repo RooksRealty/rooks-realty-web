@@ -1,4 +1,5 @@
-  var app = angular.module('rooksRealty',['ngResource', 'ngRoute', 'services', 'admin', 'helpers']);
+  var app = angular.module('rooksRealty',['ngResource', 'ngRoute', 'services', 'ui.bootstrap',
+    'admin', 'helpers', 'contact', 'listing-detail']);
 
   app.config(['$routeProvider',
     function($routeProvider) {
@@ -68,10 +69,29 @@
     }
   ]);
 
-  app.controller('AgentDetailController', ['$scope', '$routeParams', 'RealtorService',
-    function ($scope, $routeParams, RealtorService) {
+  app.controller('AgentDetailController', ['$scope', '$modal', '$routeParams', 'RealtorService',
+    function ($scope, $modal, $routeParams, RealtorService) {
       window.scrollTo(0, 0);
       $scope.agent = RealtorService.show({id: $routeParams.id});
+
+      $scope.scheduleShowing = function (listing) {
+        var modalInstance = $modal.open({
+          templateUrl: 'views/company/schedule-showing.html',
+          controller: 'ScheduleShowingController',
+          size: 'md',
+          resolve: {
+            listing: function () {
+              return listing;
+            }
+          }
+        });
+
+        modalInstance.result.then(function () {
+          
+        }, function () {
+        
+        });
+      };
     }
   ]);
 
@@ -79,74 +99,4 @@
     function ($scope, Realtors) {
       window.scrollTo(0, 0);
     }
-  ]);
-
-  app.controller('ContactController', ['$scope', '$location', 'EmailService',
-    function ($scope, $location, EmailService) {
-      window.scrollTo(0, 0);
-
-      $scope.alerts = [
-        { type: 'danger', msg: 'Something went wrong. Please try to submit again.' },
-        { type: 'success', msg: 'Your message has been submitted. You should hear from us soon.' }
-      ];
-
-      $scope.submit = function (contact) {
-        if ($scope.contactForm.$valid) {
-          $scope.sending = true;
-    
-          EmailService.sendEmail(contact, function () {
-            $scope.alert = $scope.alerts[1];
-            $scope.contact = {};
-            $scope.contactForm.$setPristine();
-            $scope.contactForm.$setUntouched();
-            $scope.showAlert = true;
-            $scope.sending = false;
-          }, function (error) {
-            console.log(error);
-            $scope.alert = $scope.alerts[0];
-            $scope.showAlert = true;
-            $scope.sending = false;
-          });
-        }
-      };
-
-      $scope.isDisabled = function (contactForm) {
-        return contactForm.email.$touched && contactForm.email.$invalid || 
-              contactForm.message.$touched && contactForm.message.$invalid ||
-              contactForm.email.$untouched || contactForm.message.$untouched;
-      };
-    }
-  ]);
-
-  app.controller('ListingDetailController', ['$scope', '$routeParams', 'ListingService',
-    function ($scope, $routeParams, ListingService) {
-      var map;
-
-      window.scrollTo(0, 0);
-      
-      $scope.listing = ListingService.show({id: $routeParams.id}, function () {
-        
-        var mapOptions = {
-          zoom: 17
-        };
-
-        $scope.searchAddress = $scope.listing.address + "," + $scope.listing.city + "," + $scope.listing.zip_code;
-
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode( { 'address': $scope.searchAddress}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-            });
-          } else {
-            console.log('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-      });
-    }
-
   ]);
