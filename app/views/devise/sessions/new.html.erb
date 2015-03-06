@@ -1,4 +1,8 @@
 <div class="col-xs-offset-3 col-xs-6 devise">
+
+  <div class="alert alert-info <%= notice.blank? ? 'hidden' : '' %>" role="alert"><%= notice %></div>
+  <div class="alert alert-danger <%= alert.blank? ? 'hidden' : '' %>" role="alert"><%= alert %></div>
+
   <h2>Log in</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {role: 'form', class: 'horizontal-form'}) do |f| %>
