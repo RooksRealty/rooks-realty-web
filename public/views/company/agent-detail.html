@@ -8,7 +8,7 @@
 
 		<p><i class="fa fa-envelope-o"></i> <a href="mailto:{{agent.email}}">{{agent.email}}</a></p>
 		<p><i class="fa fa-phone"></i> <a href="tel:{{agent.phone_number}}">{{agent.phone_number}}</a></p>
-		<button ng-click="scheduleShowing()" class="btn btn-info">Schedule a Showing</button>
+		<button ng-click="scheduleShowing()" class="btn btn-info hidden">Schedule a Showing</button>
 	</div>
 
 	<div class="col-md-offset-2 col-md-8 agent-listings">
@@ -23,7 +23,7 @@
 
 			<div class="clear"></div>
 			<strong>MLS #: {{listing.mls}}</strong><br><br>
-			<button ng-click="scheduleShowing(listings)" class="btn btn-info">Schedule a Showing</button>
+			<button ng-click="scheduleShowing(listing)" class="btn btn-info">Schedule a Showing</button>
 
 			<h2>{{listing.price | currency:"$":0 }}</h2><br>
 			

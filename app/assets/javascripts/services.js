@@ -34,9 +34,22 @@ app.factory('Realtors', ['$resource', function ($resource) {
 	});
 }]);
 
+app.factory('Users', ['$resource', function ($resource) {
+  return $resource('/users.json', {}, {
+    query: { method: 'GET', isArray: true, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
+    create: { method: 'POST', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
+  });
+}]);
+
 
 app.factory('EmailService', ['$resource', function ($resource) {
   return $resource('/contact', {}, {
     sendEmail: { method: 'POST', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
+  });
+}]);
+
+app.factory('ShowingService', ['$resource', function ($resource) {
+  return $resource('/schedule_showing', {}, {
+    scheduleShowing: { method: 'POST', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
   });
 }]);

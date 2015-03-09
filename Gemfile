@@ -24,6 +24,7 @@ group :test, :development do
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-stack_explorer'
+  gem 'mailcatcher'
 end
 
 

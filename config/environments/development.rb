@@ -38,12 +38,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
 
+ActionMailer::Base.perform_deliveries = true
+ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
-  :address        => 'smtp.sendgrid.net',
-  :port           => '587',
-  :authentication => :plain,
-  :user_name      => 'app33555062@heroku.com',
-  :password       => '2gkgymxx',
-  :domain         => 'heroku.com',
-  :enable_starttls_auto => true
+    :address => "127.0.0.1",
+    :port => 1025,
+    :domain => "everydayrails.com"
 }

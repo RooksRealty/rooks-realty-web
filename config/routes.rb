@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   post 'contact' => 'contact#contact'
+  post 'schedule_showing' => 'contact#scheduleShowing'
   post 'incoming_mails' => 'incoming_mails#create'
 
   get 'admin' => 'admin#index'
