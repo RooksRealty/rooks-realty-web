@@ -23,6 +23,12 @@ class UsersController < AdminController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    respond_with(@user)
+  end
+
   private
 
   def restrict_access

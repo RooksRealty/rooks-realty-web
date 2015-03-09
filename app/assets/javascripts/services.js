@@ -41,6 +41,13 @@ app.factory('Users', ['$resource', function ($resource) {
   });
 }]);
 
+app.factory('UserService', ['$resource', function ($resource) {
+    return $resource('/users/:id.json', {}, {
+      show: { method: 'GET', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
+      update: { method: 'PUT', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } },
+      delete: { method: 'DELETE', params: {id: '@id'}, headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
+    });
+}]);
 
 app.factory('EmailService', ['$resource', function ($resource) {
   return $resource('/contact', {}, {

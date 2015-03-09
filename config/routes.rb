@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, :skip => [:registrations]
-  resources :users, :only => [:new, :create, :index]
+  resources :users, :only => [:new, :create, :index, :destroy]
 
   resources :listings
   resources :realtors
