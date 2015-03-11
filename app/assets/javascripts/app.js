@@ -1,5 +1,5 @@
   var app = angular.module('rooksRealty',['ngResource', 'ngRoute', 'services', 'ui.bootstrap',
-    'admin', 'helpers', 'contact', 'listing-detail']);
+    'admin', 'helpers', 'contact', 'listing-detail', 'search']);
 
   app.config(['$routeProvider',
     function($routeProvider) {
@@ -27,6 +27,10 @@
         when('/listings/:id', {
           templateUrl: 'views/listings/listing-detail.html',
           controller: 'ListingDetailController'
+        }).
+        when('/search', {
+          templateUrl: 'views/company/search.html',
+          controller: 'SearchController'
         }).
         otherwise({
           redirectTo: '/'

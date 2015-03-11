@@ -1,0 +1,139 @@
+<div class="container">
+
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Property Search
+			</div>
+
+			<div class="panel-body">
+				<form>
+				  <div class="form-group col-md-12">
+				    <label for="location" class="control-label">Location</label>
+					<input type="text" class="form-control" id="text" ng-model="query.location">
+				  </div>
+				  <div class="form-group col-md-6">
+				    <label for="minimum" class="control-label">Min</label>
+				    <select class="form-control" id="minimum" ng-model="query.min_price">
+				    	<option>Any</option>
+				    	<option ng-repeat="i in getNumber(prices) track by $index" value="{{$index * 25000 + 25000}}">{{$index * 25000 + 25000 | currency:"$":0}}</option>
+				    </select>
+				  </div>
+				  <div class="form-group col-md-6">
+				    <label for="maximum" class="control-label">Max</label>
+				    <select class="form-control" id="maximum" ng-model="query.max_price">
+				    	<option>Any</option>
+				    	<option ng-repeat="i in getNumber(prices) track by $index">{{$index * 25000 + 25000 | currency:"$":0}}</option>
+				    </select>
+				  </div>
+				  <div class="form-group col-md-6">
+				    <label for="bed" class="control-label">Beds</label>
+				    <select class="form-control" id="bed" ng-model="query.beds">
+				    	<option>Any</option>
+				    	<option ng-repeat="i in getNumber(rooms) track by $index" value="{{$index + 1}}">{{$index + 1}}+</option>
+				    </select>
+				  </div>
+				  <div class="form-group col-md-6">
+				    <label for="bath" class="control-label">Baths</label>
+				    <select class="form-control" id="bath" ng-model="query.baths">
+				    	<option>Any</option>
+				    	<option ng-repeat="i in getNumber(rooms) track by $index" value="{{$index + 1}}">{{$index + 1}}+</option>
+				    </select>
+				  </div>
+				  <div class="form-group col-md-6">
+				    <label for="sqft" class="control-label">Min Sq Ft</label>
+				    <select class="form-control" id="sqft" ng-model="query.sqft" value="{{$index * 500 + 500}}">
+				    	<option>Any</option>
+				    	<option ng-repeat="i in getNumber(sqft) track by $index">{{$index * 500 + 500 | number}}</option>
+				    </select>
+				  </div>
+				  <div class="form-group col-md-6">
+				    <label for="acres" class="control-label">Min Acres</label>
+				    <select class="form-control" id="acres" ng-model="query.acres">
+				    	<option>Any</option>
+				    	<option ng-repeat="i in getNumber(acres) track by $index" value="{{$index * 0.5}}">{{$index * 0.5 | number}}</option>
+				    </select>
+				  </div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-8">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				{{filtered.length | number}} results in {{query.location}} for {{query.type}}
+			</div>
+			<div class="panel-body">
+				<!-- <div class="pull-left">
+					<label class="control-label" for="sort-by">Sort by</label>
+					<select class="form-control" id="sort-by" ng-model="sortBy" ng-options="type.label for type in sortTypes">
+				</div> -->
+				<div class="pull-right">
+					<label class="control-label">View:</label>
+					<div class="btn-group" role="group">
+					  <button type="button" class="btn btn-default" 
+					  		ng-click="displayAs = 'grid'"
+					  		ng-class="{active:displayAs === 'grid'}">
+					  	<i class="fa fa-th"></i> Grid
+					  </button>
+					  <button type="button" class="btn btn-default" 
+					  		ng-click="displayAs = 'list'"
+					  	 	ng-class="{active:displayAs === 'list'}">
+					  	<i class="fa fa-list"></i> List
+					  </button>
+					  <button type="button" class="btn btn-default hidden" 
+					  		ng-click="displayAs = 'map'"	
+					  	 	ng-class="{active:displayAs === 'map'}">
+					  	<i class="fa fa-map-marker"></i> Map
+					  </button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="text-center loading" ng-show="loading">
+			<i class="fa fa-spinner fa-pulse fa-5x"></i>
+			<p>Loading...</p>
+		</div>
+
+		<div ng-hide="loading" class="listing" ng-class="{'col-md-4 grid':displayAs === 'grid'}" 
+			ng-repeat="listing in filtered = (filteredListings | orderBy:reverseSort | searchFilter:query | limitTo:numPerPage)">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div ng-class="{'col-md-3':displayAs === 'list'}">
+						<img class="thumb" ng-src="{{listing.avatar}}" 
+							ng-class="{'text-center':displayAs === 'grid'}"/>
+					</div>
+
+					<div ng-class="{'col-md-9':displayAs === 'list'}">
+						<span class="pull-left">
+							{{listing.address}}<span ng-hide="displayAs === 'grid'">,</span>
+							<br ng-show="displayAs === 'grid'">
+							{{listing.city}}, {{listing.state}} {{listing.zipcode}}<br>
+							MLS # {{listing.mls}}
+						</span>
+						<span class="pull-right price">{{listing.price | currency:"$":0}}</span>
+
+						<div class="description clear" ng-hide="displayAs === 'grid'">
+							{{listing.long_description}}
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer">
+	            	<span ng-class='{empty:!listing.bedrooms}'>{{listing.bedrooms}} <i class="fa fa-bed"></i> | </span>
+	            	<span ng-class='{empty:!listing.bathrooms}'>{{listing.bathrooms}} <img src='assets/shower.png' /></span>
+	            	<span ng-class='{empty:lisitng.sqft}' ng-show="listing.sqft && displayAs === 'list'"> | {{listing.sqft | number}} Sq Ft</span>
+	            	<span ng-class="{empty:listing.acres == 0}" ng-show="listing.acres && displayAs === 'list'"> | {{listing.acres | number}} Acres</span>
+	            </div>
+			</div>
+		</div>
+
+		<div class="text-center clear">
+	    	<pagination total-items="listings.length" ng-model="currentPage"></pagination>
+	    </div>
+
+	</div>
+
+</div>

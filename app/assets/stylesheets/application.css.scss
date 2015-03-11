@@ -106,6 +106,21 @@
       }
     }
   }
+
+  .loading {
+    margin-top: 150px;
+  }
+
+  .panel {
+    .panel-heading {
+      color: #ffffff;
+    }
+
+    .panel-footer {
+      color: #ffffff;
+      font-size: 14px;
+    }
+  }
 }
 
 html, body, #map-canvas { height: 300px; margin: 0; padding: 0;}
