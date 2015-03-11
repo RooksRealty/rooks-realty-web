@@ -7,6 +7,7 @@
     "angular-bootstrap": "latest",
     "bootstrap-sass-official": "latest",
     "ng-file-upload": "latest",
-    "ng-file-upload-shim": "latest"
+    "ng-file-upload-shim": "latest",
+    "underscore": "latest"
   }
 }
