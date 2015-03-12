@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sass-official
 //= require underscore
 //= require angular/angular
 //= require angular-resource/angular-resource
@@ -20,4 +21,5 @@
 //= require angular-file-upload
 //= require ng-file-upload
 //= require ng-file-upload-shim
+//= require ng-autocomplete
 //= require_tree .

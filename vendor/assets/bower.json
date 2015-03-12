@@ -8,6 +8,7 @@
     "bootstrap-sass-official": "latest",
     "ng-file-upload": "latest",
     "ng-file-upload-shim": "latest",
-    "underscore": "latest"
+    "underscore": "latest",
+    "ng-autocomplete": "latest"
   }
 }
