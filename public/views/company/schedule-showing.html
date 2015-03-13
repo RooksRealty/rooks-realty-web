@@ -24,7 +24,13 @@
 	    </div>
 	  </div>
 	  <div class="form-group">
-	  	<label class="col-sm-offset-3 col-sm-8 pull-left">MLS #: {{listing.mls}}</label>
+	  	<label class="control-label" ng-class="{'col-sm-offset-3 col-sm-8 pull-left':!showOptions, 'col-sm-3':showOptions}">MLS #: {{listing.mls}}</label>
+	  	<div class="col-sm-8">
+	  		<select ng-show="showOptions" class="form-control">
+	  			<option></option>
+	  			<option ng-repeat="listing in listings">{{listing.mls}}</option>
+	  		</select>
+	  	</div>
 	  </div>
 	  <div class="form-group">
 	  	<label for="additional" class="col-sm-3 control-label">Additional Info</label>
