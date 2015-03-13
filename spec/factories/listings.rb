@@ -1,11 +1,11 @@
 FactoryGirl.define do
   factory :listing do
-    address "MyString"
-city "MyString"
-state "MyString"
-zipcode "MyString"
-price 1
-mls 1
+    address '123 Abc St.'
+    city 'Huntsville'
+    state 'AL'
+    zipcode '35806'
+    price 100000
+    mls 5432198
   end
 
 end

@@ -79,6 +79,12 @@ GEM
       thor (~> 0.19.1)
     hike (1.2.3)
     i18n (0.7.0)
+    jasmine (2.2.0)
+      jasmine-core (~> 2.2)
+      phantomjs
+      rack (>= 1.2.1)
+      rake
+    jasmine-core (2.2.0)
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -110,6 +116,7 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.18.1)
+    phantomjs (1.9.8.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -223,6 +230,7 @@ DEPENDENCIES
   devise
   factory_girl_rails (~> 4.0)
   foreman
+  jasmine
   jbuilder (~> 2.0)
   jquery-rails
   mailcatcher
