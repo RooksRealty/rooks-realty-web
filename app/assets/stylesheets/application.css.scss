@@ -14,12 +14,20 @@
  *= require_self
  */
 
- //= require font-awesome
-
 @import "bootstrap-theme.min.css";
 @import "bootstrap-select/dist/css/bootstrap-select.min.css";
 
 @font-face {
+  font-family: "FontAwesome";
+  src: font-url('fontawesome-webfont.eot');
+  src: font-url('fontawesome-webfont.woff'),
+  font-url('fontawesome-webfont.ttf'),
+  font-url('fontawesome-webfont.svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+ @font-face {
   font-family: Raleway;
   src: local('../assets/Raleway-Regular'),
   font-url('../assets/Raleway-Regular.eot?#iefix') format('embedded-opentype'),
