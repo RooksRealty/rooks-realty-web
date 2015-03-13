@@ -6,12 +6,12 @@
       <div class="col-md-4 agent" ng-repeat="agent in agents">
         <div class="panel panel-default">
 
-          <a href="#/agents/{{agent.id}}"> <header style="background-image:url('{{agent.avatar}}')"></header></a>
+          <a href="../#/agents/{{agent.id}}"> <header style="background-image:url('{{agent.avatar}}')"></header></a>
 
           <h4 class="text-center">{{agent.name}}</h4>
           
           <div class="panel-footer text-center">
-            <i class="fa fa-envelope-o"></i> <a href="mailto:{{agent.email}}" target="_blank">{{agent.email}}</a><br>
+              <span ng-show="agent.email"><i class="fa fa-envelope-o"></i> <a href="mailto:{{agent.email}}" target="_blank">{{agent.email}}</a></span><br>
             <span ng-show="agent.phone_number"><i class="fa fa-phone"></i> <a href="tel:{{agent.phone_number}}">{{agent.phone_number}}</a></span>
           </div>
         </div>
