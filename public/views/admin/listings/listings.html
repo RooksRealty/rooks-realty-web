@@ -28,7 +28,7 @@
 		      <input type="text" class="form-control" name="city" ng-model="listing.city" id="city" required>
 		    </div>
 		    <label for="state" class="col-sm-1 control-label">State *</label>
-		    <div class="col-sm-2" ng-class="{'has-error': listingForm.state.$touched && listingForm.state.$invalid}">
+		    <div id="state" class="col-sm-2" ng-class="{'has-error': listingForm.state.$touched && listingForm.state.$invalid}">
 		      	<select class="form-control" ng-model="listing.state" name="state" required>
 		      	  <option></option>
 				  <option>AL</option>
@@ -53,7 +53,7 @@
 		  <div class="form-group" ng-class="{'has-error': listingForm.type.$touched && listingForm.type.$invalid}">
 		  	<label for="type" class="col-sm-2 control-label">Type *</label>
 		    <div class="col-sm-3">
-		      	<select class="form-control" ng-model="listing.build_type" name="type" required>
+		      	<select id="type" class="form-control" ng-model="listing.build_type" name="type" required>
 				  <option ng-repeat="type in types">{{type}}</option>
 				</select>
 		    </div>
@@ -81,9 +81,9 @@
 		    <div class="col-sm-2">
 		      <input type="number" class="form-control" id="acres" ng-model="listing.acres">
 		    </div>
-		    <label for="year" class="col-sm-2 control-label" ng-class="{'has-error': listingForm.year.$touched && listingForm.year.$invalid}">Year Built *</label>
+		    <label for="year" class="col-sm-2 control-label">Year Built</label>
 		    <div class="col-sm-2">
-		      <input type="number" class="form-control" id="year" ng-model="listing.year_built" required>
+		      <input type="text" class="form-control" id="year" ng-model="listing.year_built">
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -99,16 +99,18 @@
 		  	</div>
 		  </div>
 		  <div class="form-group" ng-class="{'has-error': listingForm.realtor.$touched && listingForm.realtor.$invalid}">
-		    <label for="realtor" class="col-sm-2 control-label">Realtor *</label>	
+		    <label for="realtor" class="col-sm-2 control-label">Realtor *</label>
 		    <div class="col-sm-5">
-		    	<select class="form-control" id="realtor" name="realtor" ng-model="listing.realtor" ng-options="realtor.name for realtor in realtors">
+		    	<select class="form-control" id="realtor" name="realtor" ng-model="listing.realtor.name">
+                   <option ng-repeat="realtor in realtors">{{realtor.name}}</option>
+		    	</select>
 		    </div>
 		  </div>
 		  <div class="form-group">
 		  	<label for="image" class="col-sm-2 control-label">Picture</label>
 		  	<div class="col-sm-5">
 		  		<img ng-hide="temp_file" class="thumb" ng-src="{{listing.avatar}}"/>
-		  		<input type="file" ng-file-select="setFile($files)" multiple>
+		  		<input id="image" type="file" ng-file-select="setFile($files)" multiple>
 		  	</div>
 		  </div>
 		</form>
