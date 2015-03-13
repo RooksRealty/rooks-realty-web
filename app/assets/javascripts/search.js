@@ -59,6 +59,8 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
                 $('#location').addClass('hidden');
                 $('label[for="location"]').addClass('hidden');
             }
+
+            $('.selectpicker').selectpicker();
             // $('.search-panel').affix({ offset: { top: 0 } });
         };
         
@@ -81,6 +83,7 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
             }
         });
 
+        $('.selectpicker').selectpicker();
         $scope.init();
     }
 ]);

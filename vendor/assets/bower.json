@@ -12,6 +12,7 @@
     "ngAutocomplete": "latest",
     "bootstrap-select": "latest",
     "font-awesome": "latest",
-    "angular-mocks": "latest"
+    "angular-mocks": "latest",
+    "bootstrap-sass": "latest"
   }
 }
