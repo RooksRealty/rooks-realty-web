@@ -2,7 +2,7 @@
 
     <div class="col-md-4">
         <div class="panel panel-default search-panel">
-            <div class="panel-heading">
+            <div class="panel-heading text-center">
                 Property Search
             </div>
 
@@ -147,11 +147,13 @@
                     </div>
 
                     <div ng-class="{'col-md-9':displayAs === 'list'}">
-						<span class="pull-left">
-							{{listing.address}}<span ng-hide="displayAs === 'grid'">,</span>
-							<br ng-show="displayAs === 'grid'">
-							{{listing.city}}, {{listing.state}} {{listing.zipcode}}<br>
-							MLS # {{listing.mls}}
+						<span class="address-wrapper">
+                            <span class="address">
+                                {{listing.address}}<span ng-hide="displayAs === 'grid'">,</span>
+                                <br ng-show="displayAs === 'grid'">
+                                {{listing.city}}, {{listing.state}} {{listing.zipcode}}<br>
+                            </span>
+							<span class="mls">MLS # {{listing.mls}}</span>
 						</span>
                         <span class="pull-right price">{{listing.price | currency:"$":0}}</span>
 

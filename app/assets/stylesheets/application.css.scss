@@ -30,32 +30,53 @@
 }
 
  @font-face {
-  font-family: Raleway;
-  src: local('../assets/Raleway-Regular'),
-  font-url('../assets/Raleway-Regular.eot?#iefix') format('embedded-opentype'),
-  font-url('../assets/Raleway-Regular.ttf') format('truetype');
+  font-family: SourceSansPro;
+  src: local('../assets/SourceSansPro-Regular'),
+  font-url('../assets/SourceSansPro-Regular.ttf') format('truetype');
   font-weight: normal;
 }
 
 @font-face {
-  font-family: Raleway;
-  src: local('../assets/Raleway-Light'),
-  font-url('../assets/Raleway-ExtraLight.eot?#iefix') format('embedded-opentype'),
-  font-url('../assets/Raleway-ExtraLight.ttf') format('truetype');
+  font-family: SourceSansPro;
+  src: local('../assets/SourceSansPro-Italic'),
+  font-url('../assets/SourceSansPro-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: SourceSansPro;
+  src: local('../assets/SourceSansPro-Light'),
+  font-url('../assets/SourceSansPro-Light.ttf') format('truetype');
   font-weight: light;
 }
 
 @font-face {
-  font-family: Raleway;
-  src: local('../assets/Raleway-ExtraBold'),
-  font-url('../assets/Raleway-ExtraBold.eot?#iefix') format('embedded-opentype'),
-  font-url('../assets/Raleway-ExtraBold.ttf') format('truetype');
+  font-family: SourceSansPro;
+  src: local('../assets/SourceSansPro-LightItalic'),
+  font-url('../assets/SourceSansPro-LightItalic.ttf') format('truetype');
+  font-weight: light;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: SourceSansPro;
+  src: local('../assets/SourceSansPro-Bold'),
+  font-url('../assets/SourceSansPro-Bold.ttf') format('truetype');
   font-weight: bold;
+}
+
+@font-face {
+  font-family: SourceSansPro;
+  src: local('../assets/SourceSansPro-BoldItalic'),
+  font-url('../assets/SourceSansPro-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
 }
 
 
  body {
- 	font-family: Raleway;
+ 	font-family: SourceSansPro;
 
   form {
     .form-group {

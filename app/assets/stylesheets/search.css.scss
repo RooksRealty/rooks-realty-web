@@ -1,3 +1,7 @@
+$font-size: 16px;
+$line-height: 1.4;
+$lines-to-show: 3;
+
 .listing {
   &.grid {
     .panel {
@@ -5,6 +9,14 @@
         min-height: 200px;
         height: 200px;
         max-height: 200px;
+
+        .address-wrapper {
+          display: block;
+
+          .address {
+            font-weight: normal;
+          }
+        }
       }
     }
   }
@@ -12,13 +24,40 @@
   .panel {
     .price {
       font-weight: bold;
-      font-size: 18px;
+      font-size: 20px;
+    }
+
+    .address {
+      font-weight: bold;
+    }
+
+    .mls {
+      font-size: 14px;
+    }
+
+    .description {
+      display: block; /* Fallback for non-webkit */
+      display: -webkit-box;
+      padding-top: 20px;
+      height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+      margin: 0 auto;
+      font-size: $font-size;
+      line-height: $line-height;
+      -webkit-line-clamp: $lines-to-show;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
 
 .search-panel {
   width: 348px;
+
+  .panel-heading {
+    font-weight: bold;
+    font-size: 16px;
+  }
 
   .panel-body {
     .selectpicker {
