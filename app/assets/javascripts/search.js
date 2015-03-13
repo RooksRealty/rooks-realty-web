@@ -38,7 +38,7 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
             baths: 'Any',
             sqft: 'Any',
             acres: 'Any',
-            type: 'All',
+            types: '',
             year: 'Any'
         };
 

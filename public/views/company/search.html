@@ -99,8 +99,8 @@
             <div class="panel-heading">
                 <strong>{{filtered.length | number}}</strong> results
                 <span ng-show="query.location">in</span> <strong>{{query.location}}</strong>
-                <span ng-show="query.type">for</span> <strong>{{query.type.join(", ")}}</strong>
-                <span ng-show="query.type === 'All'">types</span>
+                <span ng-show="query.types">for</span> <strong>{{query.types.join(", ")}}</strong>
+                <span ng-show="query.types === ''">for <strong>All</strong> types</span>
             </div>
             <div class="panel-body">
                 <!-- <div class="pull-left">
@@ -142,8 +142,10 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div ng-class="{'col-md-3':displayAs === 'list'}">
-                        <img class="thumb" ng-src="{{listing.avatar}}"
+                        <a href="../#/listings/{{listing.id}}">
+                            <img class="thumb" ng-src="{{listing.avatar}}"
                              ng-class="{'text-center':displayAs === 'grid'}"/>
+                        </a>
                     </div>
 
                     <div ng-class="{'col-md-9':displayAs === 'list'}">
