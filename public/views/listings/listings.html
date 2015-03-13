@@ -36,7 +36,9 @@
             <span ng-class='{empty:!listing.bedrooms}'>{{listing.bedrooms}} <i class="fa fa-bed"></i> | </span>
             <span ng-class='{empty:!listing.bathrooms}'>{{listing.bathrooms}} <img src='assets/shower.png' /></span>
             <span ng-class='{empty:lisitng.sqft}' ng-show="listing.sqft"> | {{listing.sqft | number}} Sq Ft</span>
-            <span ng-class="{empty:listing.acres == 0}" ng-show="listing.acres"> | {{listing.acres | number}} Acres</span>
+            <span ng-class="{empty:listing.acres == 0}" ng-show="listing.acres"> | {{listing.acres | number}} Acres
+            </span>
+            <span ng-class="{empty:listing.year_built == 0}" ng-show="listing.year_built"> | Year Built: {{listing.year_built}}</span>
           </div>
         </div>
       </div>

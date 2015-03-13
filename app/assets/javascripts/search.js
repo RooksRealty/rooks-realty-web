@@ -7,9 +7,16 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
         $scope.rooms = 4;
         $scope.sqft = 20;
         $scope.acres = 30;
+        $scope.year = 12;
         $scope.currentPage = 1;
         $scope.numPerPage = 10;
         $scope.displayAs = 'list';
+
+        $scope.types = [ 
+            'Single Family', 'Condo', 'Multi-Family', 
+            'Commercial', 'Land', 'Townhouse', 'Lease', 
+            'Farm & Ranch'
+        ];
 
         var defaultBounds = new google.maps.LatLngBounds(
             // North Alabama
@@ -28,7 +35,9 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
             beds: 'Any',
             baths: 'Any',
             sqft: 'Any',
-            acres: 'Any'
+            acres: 'Any',
+            type: 'All',
+            year: 'Any'
         };
 
         $scope.sortTypes = [
@@ -49,6 +58,8 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
 
                 $scope.filteredListings = $scope.listings.slice(begin, end);
             });
+
+            $('.selectpicker').selectpicker();
 
             // $('.search-panel').affix({ offset: { top: 0 } });
         };
@@ -86,6 +97,7 @@ app.filter('searchFilter', function () {
         var baths = filterByCriteria(query.baths, input, 'bathrooms', true);
         var sqft = filterByCriteria(query.sqft, input, 'sqft', true);
         var acres = filterByCriteria(query.acres, input, 'acres', true);
+        var year = filterByCriteria(query.year, input, 'year_built', true);
 
         var location = [];
         if(query.locationDetails && query.location) {
@@ -101,20 +113,31 @@ app.filter('searchFilter', function () {
             location = input;
         }
 
-        return _.intersection(min_price, max_price, beds, baths, sqft, acres, location);
+        var type = [];
+        if(query.types && query.types.length > 0) {
+            for(var idx in input) {
+                if(_.contains(query.types, input[idx].build_type)) {
+                    type.push(input[idx]);
+                }
+            }
+        } else {
+            type = input;
+        }
+
+        return _.intersection(min_price, max_price, beds, baths, sqft, acres, location, year, type);
     }
 });
 
 var filterByCriteria = function (criteria, input, field, min) {
     var output = [];
     if (criteria !== 'Any') {
-        for (var idx in input) {
+        output = _.filter(input, _.bind(function(listing) {
             if (min) {
-                output.push(getMin(criteria, input[idx], field));
+                return getMin(criteria, listing, field);
             } else {
-                output.push(getMax(criteria, input[idx], field));
+                return getMax(criteria, listing, field);
             }
-        }
+        }), criteria);
     } else {
         output = input;
     }
@@ -124,11 +147,11 @@ var filterByCriteria = function (criteria, input, field, min) {
 
 var filterLocation = function (criteria, input, field) {
     var output = [];
-    for(var idx in input) {
-        if(criteria === input[idx][field]) {
-            output.push(input[idx]);
+    output = _.filter(input, _.bind(function(listing) {
+        if(criteria === listing[field]) {
+            return listing;
         }
-    }
+    }), criteria);
 
     return output;
 }

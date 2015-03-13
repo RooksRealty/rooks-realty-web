@@ -14,7 +14,10 @@
  *= require_self
  */
 
- @import "bootstrap.min.css";
+ //= require font-awesome
+
+@import "bootstrap-theme.min.css";
+@import "bootstrap-select/dist/css/bootstrap-select.min.css";
 
 @font-face {
   font-family: "FontAwesome";

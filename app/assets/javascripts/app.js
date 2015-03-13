@@ -32,6 +32,10 @@
           templateUrl: 'views/company/search.html',
           controller: 'SearchController'
         }).
+        when('/showing', {
+          templateUrl: 'views/company/schedule-showing.html',
+          controller: 'ScheduleShowingController'
+        }).
         otherwise({
           redirectTo: '/'
         });

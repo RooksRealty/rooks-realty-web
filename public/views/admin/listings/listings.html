@@ -50,6 +50,14 @@
 			  <span class="input-group-addon">.00</span>
 		    </div>
 		  </div>
+		  <div class="form-group" ng-class="{'has-error': listingForm.type.$touched && listingForm.type.$invalid}">
+		  	<label for="type" class="col-sm-2 control-label">Type *</label>
+		    <div class="col-sm-3">
+		      	<select class="form-control" ng-model="listing.build_type" name="type" required>
+				  <option ng-repeat="type in types">{{type}}</option>
+				</select>
+		    </div>
+		  </div>
 		  <div class="form-group">
 		    <label for="bedrooms" class="col-sm-2 control-label"># of Bedrooms</label>
 		    <div class="col-sm-2">
@@ -59,12 +67,12 @@
 		    <div class="col-sm-2">
 		      <input type="number" class="form-control" id="bathrooms" ng-model="listing.bathrooms">
 		    </div>
-		  </div>
-		  <div class="form-group">
 		    <label for="garages" class="col-sm-2 control-label"># of Garages</label>
 		    <div class="col-sm-2">
 		      <input type="number" class="form-control" id="garages" ng-model="listing.garages">
 		    </div>
+		  </div>
+		  <div class="form-group">
 		    <label for="sqft" class="col-sm-2 control-label">Sq Ft</label>
 		    <div class="col-sm-2">
 		      <input type="number" class="form-control" id="sqft" ng-model="listing.sqft">
@@ -72,6 +80,10 @@
 		    <label for="acres" class="col-sm-2 control-label">Acres</label>
 		    <div class="col-sm-2">
 		      <input type="number" class="form-control" id="acres" ng-model="listing.acres">
+		    </div>
+		    <label for="year" class="col-sm-2 control-label" ng-class="{'has-error': listingForm.year.$touched && listingForm.year.$invalid}">Year Built *</label>
+		    <div class="col-sm-2">
+		      <input type="number" class="form-control" id="year" ng-model="listing.year_built" required>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -122,7 +134,6 @@
 
 		<thead>
 			<tr>
-				<th></th>
 				<th ng-click="columnFilter('mls')">MLS <i ng-class="updateSortArrow('mls')"></i></th>
 				<th ng-click="columnFilter('address')">Address <i ng-class="updateSortArrow('address')"></i></th>
 				<th ng-click="columnFilter('price')">Price <i ng-class="updateSortArrow('price')"></i></th>
@@ -132,7 +143,8 @@
 				<th ng-click="columnFilter('garages')">Garage <i ng-class="updateSortArrow('garages')"></i></th>
 				<th ng-click="columnFilter('sqft')">SQFT <i ng-class="updateSortArrow('sqft')"></i></th>
 				<th ng-click="columnFilter('realtor')">Realtor <i ng-class="updateSortArrow('realtor')"></i></th>
-				<th ng-click="columnFilter('created_at')">Created At <i ng-class="updateSortArrow('created_at')"></i></th>
+				<th ng-click="columnFilter('year_built')">Year Built <i ng-class="updateSortArrow('year_built')"></i></th>
+				<th ng-click="columnFilter('build_type')">Type <i ng-class="updateSortArrow('build_type')"></i></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -140,9 +152,9 @@
 		<tbody>
 			<tr ng-repeat="listing in filtered = (filteredListings | filter:search | orderBy:orderByField:reverseSort)">
 				<td>
+					{{listing.mls}}<br>
 					<img class="thumb" ng-src="{{listing.avatar}}"/>
 				</td>
-				<td>{{listing.mls}}</td>
 				<td>{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}</td>
 				<td>{{listing.price | currency:"$":0 }}</td>
 				<td ng-class="{empty:!listing.acres}">{{listing.acres | number}}</td>
@@ -151,7 +163,8 @@
 				<td ng-class="{empty:!listing.garages}">{{listing.garages}}</td>
 				<td ng-class="{empty:!listing.sqft}">{{listing.sqft}}</td>
 				<td>{{listing.realtor.name}}</td>
-				<td>{{listing.created_at | date:"MMM dd, yyyy 'at' h:mma"}}</td>
+				<td ng-class="{empty:!listing.year_built}">{{listing.year_built}}</td>
+				<td ng-class="{empty:!listing.build_type}">{{listing.build_type}}</td>
 				<td>
 					<button class="btn btn-info btn-xs" ng-click="openModal(listing)"><i class="fa fa-edit"></i></button>
 					<button class="btn btn-danger btn-xs" ng-click="removeListing(listing.id)"><i class="fa fa-trash"></i></button>

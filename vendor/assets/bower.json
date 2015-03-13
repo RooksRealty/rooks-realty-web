@@ -9,6 +9,8 @@
     "ng-file-upload": "latest",
     "ng-file-upload-shim": "latest",
     "underscore": "latest",
-    "ng-autocomplete": "latest"
+    "ngAutocomplete": "latest",
+    "bootstrap-select": "latest",
+    "font-awesome": "latest"
   }
 }

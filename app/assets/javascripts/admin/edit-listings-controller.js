@@ -8,6 +8,12 @@ app.controller('EditListingController', ['$scope', '$modalInstance', 'Realtors',
 		$scope.showAlert = false;
 		$scope.alert = { msg: '' };
 
+		$scope.types = [ 
+			'Single Family', 'Condo', 'Multi-Family', 
+			'Commercial', 'Land', 'Townhouse', 'Lease', 
+			'Farm & Ranch'
+		];
+
 		$scope.create = function () {
 			if($scope.listingForm.$valid) {
 				Listings.create({listing: $scope.listing}, function () {

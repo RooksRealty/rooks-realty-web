@@ -1,1 +1,1 @@
-json.extract! @listing, :id, :address, :city, :state, :zipcode, :price, :mls, :acres, :bedrooms, :bathrooms, :garages, :sqft, :realtor, :avatar, :created_at
+json.extract! @listing, :id, :address, :city, :state, :zipcode, :price, :mls, :acres, :bedrooms, :bathrooms, :garages, :sqft, :realtor, :avatar, :created_at, :long_description, :short_description, :build_type, :year_built

@@ -19,4 +19,10 @@
 
 .search-panel {
   width: 348px;
+
+  .panel-body {
+    .selectpicker {
+      width: 60%;
+    }
+  }
 }

@@ -65,6 +65,29 @@
                             </option>
                         </select>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="types" class="control-label">Type</label>
+                        <select class="selectpicker" id="types"
+                            ng-model="query.types" name="types" 
+                            multiple title="All" data-selected-text-format="count">
+                           <option value="Single Family">Single Family</option>
+                           <option value="Condo">Condo</option>
+                           <option value="Multi-Family">Multi-Family</option>
+                           <option value="Commercial">Commercial</option>
+                           <option value="Land">Land</option>
+                           <option value="Townhouse">Townhouse</option>
+                           <option value="Lease">Lease</option>
+                           <option value="Farm &amp; Ranch">Farm &amp; Ranch</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="year" class="control-label">Year Built</label>
+                        <select class="form-control" id="year" ng-model="query.year" value="{{$index * 1900 + 1900}}">
+                            <option>Any</option>
+                            <option ng-repeat="i in getNumber(year) track by $index">{{$index * 10 + 1900}}+
+                            </option>
+                        </select>
+                    </div>
                 </form>
             </div>
         </div>
@@ -76,8 +99,8 @@
             <div class="panel-heading">
                 <strong>{{filtered.length | number}}</strong> results
                 <span ng-show="query.location">in</span> <strong>{{query.location}}</strong>
-                <span ng-show="query.type">for</span> <strong>{{query.type}}</strong>
-                {{details}}
+                <span ng-show="query.type">for</span> <strong>{{query.type.join(", ")}}</strong>
+                <span ng-show="query.type === 'All'">types</span>
             </div>
             <div class="panel-body">
                 <!-- <div class="pull-left">

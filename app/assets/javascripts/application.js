@@ -18,8 +18,9 @@
 //= require angular-resource/angular-resource
 //= require angular-route/angular-route
 //= require angular-bootstrap
-//= require angular-file-upload
+// require angular-file-upload
 //= require ng-file-upload
 //= require ng-file-upload-shim
-//= require ng-autocomplete
+//= require ngAutocomplete
+//= require bootstrap-select
 //= require_tree .
