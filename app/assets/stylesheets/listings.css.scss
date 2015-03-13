@@ -31,6 +31,17 @@
 			}
 		}
 	}
+
+    .see-more {
+      display: inline-block;
+      float: none;
+      bottom: 200px;
+      margin: auto;
+      a {
+        font-weight: bold;
+        font-size: 30px;
+      }
+    }
 	 
 	.ribbon {
 		color: #fff;

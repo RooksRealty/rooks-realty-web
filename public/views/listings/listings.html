@@ -9,7 +9,7 @@
 
   <div ng-hide="loading" class="listings cd-scrolling-bg cd-color-2" ng-controller='HomeController'>
     <div class="row-fluid cd-container">
-      <div class="col-md-4 listing" ng-repeat="listing in listings">
+      <div class="col-md-4 listing" ng-repeat="listing in listings | limitTo:5">
         <div ng-show="recent(listing)" class="ribbon ribbon-left">
           <p>New</p>
         </div>
@@ -41,6 +41,10 @@
             <span ng-class="{empty:listing.year_built == 0}" ng-show="listing.year_built"> | Year Built: {{listing.year_built}}</span>
           </div>
         </div>
+      </div>
+
+      <div class="col-md-1 see-more text-center">
+          <a class="text-primary" href="../#/search">See More <i class="glyphicon glyphicon-chevron-right"></i></a>
       </div>
     </div>
 

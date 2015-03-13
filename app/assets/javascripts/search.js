@@ -2,6 +2,8 @@ var app = angular.module('search', ['services', 'ngAutocomplete']);
 
 app.controller('SearchController', ['$scope', '$timeout', 'Listings',
     function ($scope, $timeout, Listings) {
+        window.scrollTo(0, 0);
+
         $scope.loading = true;
         $scope.prices = 40;
         $scope.rooms = 4;
