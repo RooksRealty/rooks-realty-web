@@ -1,0 +1,6 @@
+<select class="form-control" id="minimum" ng-model="query.min_price">
+    <option>Any</option>
+    <option ng-repeat="i in getNumber(prices) track by $index"
+            value="{{$index * 25000 + 25000}}">{{$index * 25000 + 25000 | currency:"$":0}}
+    </option>
+</select>

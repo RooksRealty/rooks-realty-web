@@ -145,6 +145,10 @@
       font-size: 14px;
     }
   }
+
+   .bootstrap-select {
+     width: 100% !important;
+   }
 }
 
 html, body, #map-canvas { height: 300px; margin: 0; padding: 0;}

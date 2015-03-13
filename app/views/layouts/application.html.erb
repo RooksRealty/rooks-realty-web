@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rooks Realty, Inc.</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Rooks Realty, Inc.</title>
+		<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzKnFaxquA641TGYbQEK08QZvc0htFj4I">
-  </script>
+		<script type="text/javascript"
+						src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzKnFaxquA641TGYbQEK08QZvc0htFj4I">
+		</script>
 </head>
 <body ng-app="rooksRealty">
 
@@ -17,47 +17,70 @@
 
 <div ng-controller="HomeController">
 
-<div ng-hide="isAdminPortal()">
-  <div>
+		<div ng-hide="isAdminPortal()">
+				<div>
 
-    <div class="cd-fixed-bg cd-bg-1">
+						<div class="cd-fixed-bg cd-bg-1">
 
-      <form class="form-inline hidden">
-        <div class="right-inner-addon">
-            <i class="fa fa-search fa-lg"></i>
-            <input type="search"
-                   class="form-control input-lg" 
-                   placeholder="Search" />
-        </div>
-      </form>
+								<p class="notice"><%= notice %></p>
 
-    </div> 
+								<p class="alert"><%= alert %></p>
 
-    <div class="container content">
-      <div class="row">
-        <%= yield %>
-      </div>
-    </div>
+								<form class="form-horizontal col-md-offset-3 col-md-6 search-form hidden">
+										<div class="form-group">
+												<div class="col-sm-8">
+														<input ng-model="query.location" type="search" class="form-control input-lg" placeholder="Quick Search (e.g. MLS, Address, Zip Code)"/>
+												</div>
+												<div class="col-sm-4">
+														<property-types get-number="getNumber"></property-types>
+												</div>
+										</div>
+										<div class="form-group">
+												<div class="col-sm-2">
+														<select class="form-control input-lg"></select>
+												</div>
+												<div class="col-sm-2">
+														<select class="form-control input-lg"></select>
+												</div>
+												<div class="col-sm-2">
+														<select class="form-control input-lg"></select>
+												</div>
+												<div class="col-sm-2">
+														<select class="form-control input-lg"></select>
+												</div>
+												<div class="col-sm-4">
+														<button class="btn btn-primary btn-lg">Search Property</button>
+												</div>
+										</div>
+								</form>
 
-  </div>
-</div>
+						</div>
 
-<div ng-show="isAdminPortal()" class="dashboard">
-  <p class="navbar-text pull-right">
-    <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
-    <% end %>
-  </p>
+						<div class="container content">
+								<div class="row">
+										<%= yield %>
+								</div>
+						</div>
 
-  <div class="content">
+				</div>
+		</div>
 
-    <%= yield %>
+		<div ng-show="isAdminPortal()" class="dashboard">
+				<p class="navbar-text pull-right">
+						<% if user_signed_in? %>
+							Logged in as <strong><%= current_user.email %></strong>.
+							<%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+						<% end %>
+				</p>
 
-  </div>
-</div>
+				<div class="content">
 
-<%= render 'shared/footer' %>
+						<%= yield %>
+
+				</div>
+		</div>
+
+		<%= render 'shared/footer' %>
 
 </div>
 

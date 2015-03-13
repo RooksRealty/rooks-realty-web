@@ -1,0 +1,16 @@
+<select class="selectpicker" id="types"
+        ng-model="query.types" name="types"
+        multiple title="All" data-selected-text-format="count">
+    <option value="Single Family">Single Family</option>
+    <option value="Condo">Condo</option>
+    <option value="Multi-Family">Multi-Family</option>
+    <option value="Commercial">Commercial</option>
+    <option value="Land">Land</option>
+    <option value="Townhouse">Townhouse</option>
+    <option value="Lease">Lease</option>
+    <option value="Farm &amp; Ranch">Farm &amp; Ranch</option>
+</select>
+
+<script>
+    $('.selectpicker').selectpicker();
+</script>

@@ -13,22 +13,12 @@
                         <input type="text" class="form-control" id="location" ng-autocomplete ng-model="query.location" options="locationOptions" details="query.locationDetails" placeholder="City or Zip Code">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="minimum" class="control-label">Min</label>
-                        <select class="form-control" id="minimum" ng-model="query.min_price">
-                            <option>Any</option>
-                            <option ng-repeat="i in getNumber(prices) track by $index"
-                                    value="{{$index * 25000 + 25000}}">{{$index * 25000 + 25000 | currency:"$":0}}
-                            </option>
-                        </select>
+                        <label class="control-label">Min</label>
+                        <min-price></min-price>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="maximum" class="control-label">Max</label>
-                        <select class="form-control" id="maximum" ng-model="query.max_price">
-                            <option>Any</option>
-                            <option ng-repeat="i in getNumber(prices) track by $index"
-                                    value="{{$index * 25000 + 25000}}">{{$index * 25000 + 25000 | currency:"$":0}}
-                            </option>
-                        </select>
+                        <label class="control-label">Max</label>
+                        <max-price></max-price>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="bed" class="control-label">Beds</label>
@@ -66,19 +56,8 @@
                         </select>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="types" class="control-label">Type</label>
-                        <select class="selectpicker" id="types"
-                            ng-model="query.types" name="types" 
-                            multiple title="All" data-selected-text-format="count">
-                           <option value="Single Family">Single Family</option>
-                           <option value="Condo">Condo</option>
-                           <option value="Multi-Family">Multi-Family</option>
-                           <option value="Commercial">Commercial</option>
-                           <option value="Land">Land</option>
-                           <option value="Townhouse">Townhouse</option>
-                           <option value="Lease">Lease</option>
-                           <option value="Farm &amp; Ranch">Farm &amp; Ranch</option>
-                        </select>
+                        <label class="control-label">Type</label>
+                        <property-types></property-types>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="year" class="control-label">Year Built</label>

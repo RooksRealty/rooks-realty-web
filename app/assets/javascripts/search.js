@@ -14,23 +14,6 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
         $scope.numPerPage = 10;
         $scope.displayAs = 'list';
 
-        $scope.types = [ 
-            'Single Family', 'Condo', 'Multi-Family', 
-            'Commercial', 'Land', 'Townhouse', 'Lease', 
-            'Farm & Ranch'
-        ];
-
-        var defaultBounds = new google.maps.LatLngBounds(
-            // North Alabama
-            new google.maps.LatLng(35.125974, -85.328344), 
-            new google.maps.LatLng(33.817263, -88.297399));
-
-        $scope.locationOptions = {
-            bounds: defaultBounds,
-            types: '(regions)',
-            country: 'us'
-        };
-
         $scope.query = {
             min_price: 'Any',
             max_price: 'Any',
@@ -61,8 +44,21 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
                 $scope.filteredListings = $scope.listings.slice(begin, end);
             });
 
-            $('.selectpicker').selectpicker();
+            if(window.google) {
+                var defaultBounds = new google.maps.LatLngBounds(
+                    // North Alabama
+                    new google.maps.LatLng(35.125974, -85.328344),
+                    new google.maps.LatLng(33.817263, -88.297399));
 
+                $scope.locationOptions = {
+                    bounds: defaultBounds,
+                    types: '(regions)',
+                    country: 'us'
+                };
+            } else {
+                $('#location').addClass('hidden');
+                $('label[for="location"]').addClass('hidden');
+            }
             // $('.search-panel').affix({ offset: { top: 0 } });
         };
         
