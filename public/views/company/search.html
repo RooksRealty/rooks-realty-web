@@ -10,7 +10,8 @@
                 <form>
                     <div class="form-group col-md-12">
                         <label for="location" class="control-label">Location</label>
-                        <input type="text" class="form-control" id="location" ng-autocomplete ng-model="query.location" options="locationOptions" details="query.locationDetails" placeholder="City or Zip Code">
+                        <input type="text" class="form-control" id="location" ng-autocomplete ng-model="query.location"
+                               options="locationOptions" details="query.locationDetails" placeholder="City or Zip Code">
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Min</label>
@@ -55,7 +56,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 hidden">
                         <label class="control-label">Type</label>
                         <property-types></property-types>
                     </div>
@@ -74,7 +75,7 @@
 
     <div class="col-md-8">
 
-        <div class="panel panel-default">
+        <div class="panel panel-default result-panel">
             <div class="panel-heading">
                 <strong>{{filtered.length | number}}</strong> results
                 <span ng-show="query.location">in</span> <strong>{{query.location}}</strong>
@@ -82,10 +83,14 @@
                 <span ng-show="query.types === ''">for <strong>All</strong> types</span>
             </div>
             <div class="panel-body">
-                <!-- <div class="pull-left">
-                    <label class="control-label" for="sort-by">Sort by</label>
-                    <select class="form-control" id="sort-by" ng-model="sortBy" ng-options="type.label for type in sortTypes">
-                </div> -->
+                <form class="form-inline">
+                    <div class="form-group col-md-6">
+                        <label class="control-label" for="sort-by">Sort by</label>
+                        <select class="form-control" id="sort-by" ng-model="orderByField">
+                            <option ng-repeat="type in sortTypes" value="{{type.value}}">{{type.label}}</option>
+                        </select>
+                    </div>
+                </form>
                 <div class="pull-right">
                     <label class="control-label">View:</label>
 
@@ -117,13 +122,13 @@
         </div>
 
         <div ng-hide="loading" class="listing" ng-class="{'col-md-4 grid':displayAs === 'grid'}"
-             ng-repeat="listing in filtered = (listings | orderBy:reverseSort | searchFilter:query)">
+             ng-repeat="listing in filtered = (listings | orderBy:orderByField | searchFilter:query)">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div ng-class="{'col-md-3':displayAs === 'list'}">
                         <a href="../#/listings/{{listing.id}}">
                             <img class="thumb" ng-src="{{listing.avatar}}"
-                             ng-class="{'text-center':displayAs === 'grid'}"/>
+                                 ng-class="{'text-center':displayAs === 'grid'}"/>
                         </a>
                     </div>
 

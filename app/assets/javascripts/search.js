@@ -13,6 +13,7 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
         $scope.currentPage = 1;
         $scope.numPerPage = 10;
         $scope.displayAs = 'list';
+        $scope.orderByField = 'mls';
 
         $scope.query = {
             min_price: 'Any',
