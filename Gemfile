@@ -12,6 +12,7 @@ gem 'foreman'
 gem 'nokogiri'
 gem 'paperclip'
 gem 'devise'
+gem 'app_constants'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'

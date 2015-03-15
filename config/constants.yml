@@ -1,0 +1,13 @@
+# Enter your per-environment constants below
+
+development: &default
+  google_maps_api_token:  "AIzaSyAzKnFaxquA641TGYbQEK08QZvc0htFj4I"
+  access_token:  "b9dee854a6f62cd3589c0c76569d2883"
+
+production:
+  <<: *default
+  sendgrid_username: 'app33555062@heroku.com'
+  sendgrid_password: '2gkgymxx'
+  
+test:
+  <<: *default
