@@ -8,6 +8,6 @@ production:
   <<: *default
   sendgrid_username: 'app33555062@heroku.com'
   sendgrid_password: '2gkgymxx'
-  
+
 test:
   <<: *default
