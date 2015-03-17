@@ -17,10 +17,10 @@
 
 <div ng-controller="HomeController">
 
-		<div ng-hide="isAdminPortal()">
+		<div>
 				<div>
 
-						<div class="cd-fixed-bg cd-bg-1">
+						<div class="cd-fixed-bg cd-bg-1 visible-lg">
 
 								<p class="notice"><%= notice %></p>
 
@@ -61,21 +61,6 @@
 										<%= yield %>
 								</div>
 						</div>
-
-				</div>
-		</div>
-
-		<div ng-show="isAdminPortal()" class="dashboard">
-				<p class="navbar-text pull-right">
-						<% if user_signed_in? %>
-							Logged in as <strong><%= current_user.email %></strong>.
-							<%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
-						<% end %>
-				</p>
-
-				<div class="content">
-
-						<%= yield %>
 
 				</div>
 		</div>

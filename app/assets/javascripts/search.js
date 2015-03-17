@@ -1,7 +1,7 @@
 var app = angular.module('search', ['services', 'ngAutocomplete']);
 
-app.controller('SearchController', ['$scope', '$timeout', 'Listings',
-    function ($scope, $timeout, Listings) {
+app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorScroll', 'Listings',
+    function ($scope, $timeout, $location, $anchorScroll, Listings) {
         window.scrollTo(0, 0);
 
         $scope.loading = true;
@@ -65,6 +65,10 @@ app.controller('SearchController', ['$scope', '$timeout', 'Listings',
             // $('.search-panel').affix({ offset: { top: 0 } });
         };
         
+        $scope.gotoResults = function() {
+          $location.hash('results');
+          $anchorScroll();
+        };
 
         $scope.getNumber = function (num) {
             return new Array(num);

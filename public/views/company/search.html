@@ -1,4 +1,4 @@
-<div class="container">
+<section>
 
     <div class="col-md-4">
         <div class="panel panel-default search-panel">
@@ -68,12 +68,14 @@
                             </option>
                         </select>
                     </div>
+
+                    <button class="btn btn-primary btn-block hidden-md hidden-lg" ng-click="gotoResults()">Search</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-8" id="results">
 
         <div class="panel panel-default result-panel">
             <div class="panel-heading">
@@ -82,7 +84,7 @@
                 <span ng-show="query.types">for</span> <strong>{{query.types.join(", ")}}</strong>
                 <span ng-show="query.types === ''">for <strong>All</strong> types</span>
             </div>
-            <div class="panel-body">
+            <div class="panel-body hidden-sm hidden-xs">
                 <form class="form-inline">
                     <div class="form-group col-md-6">
                         <label class="control-label" for="sort-by">Sort by</label>
@@ -125,7 +127,7 @@
              ng-repeat="listing in filtered = (listings | orderBy:orderByField | searchFilter:query)">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div ng-class="{'col-md-3':displayAs === 'list'}">
+                    <div class='listing-image' ng-class="{'col-md-3':displayAs === 'list'}">
                         <a href="../#/listings/{{listing.id}}">
                             <img class="thumb" ng-src="{{listing.avatar}}"
                                  ng-class="{'text-center':displayAs === 'grid'}"/>
@@ -139,11 +141,11 @@
                                 <br ng-show="displayAs === 'grid'">
                                 {{listing.city}}, {{listing.state}} {{listing.zipcode}}<br>
                             </span>
-							<span class="mls">MLS # {{listing.mls}}</span>
+							<span class="hidden-sm hidden-xs mls">MLS # {{listing.mls}}</span>
 						</span>
                         <span class="pull-right price">{{listing.price | currency:"$":0}}</span>
 
-                        <div class="description clear" ng-hide="displayAs === 'grid'">
+                        <div class="description clear hidden-sm hidden-xs" ng-hide="displayAs === 'grid'">
                             {{listing.long_description}}
                         </div>
                     </div>
@@ -164,4 +166,4 @@
 
     </div>
 
-</div>
+</section>

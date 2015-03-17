@@ -1,7 +1,7 @@
 <section>
 	<h2>Contact Us</h2>
 
-	<div class="panel panel-primary col-xs-offset-3 col-xs-6">
+	<div class="panel panel-primary col-md-offset-3 col-md-6">
 		<div class="panel-body">
 		  Rooks Realty, Inc.<br>
 		  1580 Sparkman Drive Northwest<br>
@@ -11,28 +11,28 @@
 		</div>
 	</div>
 
-	<div ng-show="showAlert" type="{{alert.type}}" class="alert alert-{{alert.type}} col-xs-offset-3 col-xs-6" close="closeAlert($index)" role="alert">{{alert.msg}}</div>
+	<div ng-show="showAlert" type="{{alert.type}}" class="alert alert-{{alert.type}} col-md-offset-3 col-md-6" close="closeAlert($index)" role="alert">{{alert.msg}}</div>
 
-	<form role="form" class="form-horizontal col-xs-offset-3 col-xs-6 contact" name="contactForm" novalidate>
+	<form role="form" class="form-horizontal col-md-offset-3 col-md-6 contact" name="contactForm" novalidate>
 
 		<div class="form-group">
-			<label for="name" class="col-xs-3">Your Name</label>
-			<div class="col-xs-9">
+			<label for="name" class="col-md-3">Your Name</label>
+			<div class="col-md-9">
 				<input id="name" name="name" ng-model="contact.name" type="text" class="form-control">
 			</div>
 		</div>
 
 		<div class="form-group" ng-class="{'has-error': contactForm.email.$touched && contactForm.email.$invalid}">
-			<label for="email" class="col-xs-3">Email *</label>
-			<div class="col-xs-9">
+			<label for="email" class="col-md-3">Email *</label>
+			<div class="col-md-9">
 				<input id="email" name="email" ng-model="contact.email" type="email" class="form-control" required>
 				<span ng-show="contactForm.email.$touched && contactForm.email.$invalid" class="help-block">Email is invalid.</span>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="message" class="col-xs-3">Message *</label>
-			<div class="col-xs-9" ng-class="{'has-error': contactForm.message.$touched && contactForm.message.$invalid}">
+			<label for="message" class="col-md-3">Message *</label>
+			<div class="col-md-9" ng-class="{'has-error': contactForm.message.$touched && contactForm.message.$invalid}">
 				<textarea id="message" name="message" ng-model="contact.message" class="form-control" rows="3" required></textarea>
 			</div>
 		</div>

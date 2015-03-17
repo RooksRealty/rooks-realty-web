@@ -58,7 +58,6 @@ $lines-to-show: 3;
 }
 
 .search-panel {
-  width: 348px;
 
   .panel-heading {
     font-weight: bold;
@@ -70,4 +69,16 @@ $lines-to-show: 3;
   label {
     margin-right: 10px;
   }
+}
+
+@media (max-width: 765px) {
+
+  .listing {
+    .listing-image {
+      img {
+        width: 100%;
+      }
+    }
+  }
+
 }
