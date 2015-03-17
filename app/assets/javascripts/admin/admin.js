@@ -1,5 +1,5 @@
 var app = angular.module('admin',
-	['ngResource', 'ngRoute', 'editListing', 'editAgent', 'adminListings', 'adminAgents', 'users']);
+	['ngResource', 'ngRoute', 'editListing', 'editAgent', 'adminListings', 'adminAgents', 'users', 'directives']);
 
 app.config(['$routeProvider',
 	function($routeProvider) {
@@ -15,6 +15,10 @@ app.config(['$routeProvider',
 		    when('/dashboard/users', {
 		      templateUrl: 'views/admin/users/users.html',
 		      controller: 'UsersController'
+		    }).
+		    when('/dashboard/website_info', {
+		      templateUrl: 'views/admin/info/website_info.html',
+		      controller: 'InfoController'
 		    }).
 		    otherwise({
 		      redirectTo: '/dashboard/listings'

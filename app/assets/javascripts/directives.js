@@ -1,5 +1,12 @@
 var app = angular.module('directives', []);
 
+app.directive('contactInfo', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'views/company/shared/contactInfo.html'
+    }
+});
+
 app.directive('propertyTypes', function() {
     return {
         restrict: 'E',
