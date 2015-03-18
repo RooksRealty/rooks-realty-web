@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313034508) do
+ActiveRecord::Schema.define(version: 20150317054856) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "infos", force: true do |t|
+    t.text     "about_us"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "phone_number"
+    t.string   "fax"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

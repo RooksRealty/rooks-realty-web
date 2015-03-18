@@ -1,4 +1,4 @@
-var app = angular.module('rooksRealty', ['ngResource', 'ngRoute', 'services', 'ui.bootstrap',
+var app = angular.module('rooksRealty', ['ngResource', 'ngRoute', 'services', 'ui.bootstrap', 
     'admin', 'helpers', 'contact', 'listing-detail', 'search', 'directives']);
 
 app.config(['$routeProvider',
@@ -48,12 +48,14 @@ app.controller('NavController', ['$scope', '$location', function ($scope, $locat
     };
 }]);
 
-app.controller('HomeController', ['$scope', '$resource', 'Listings', '$location',
-    function ($scope, $resource, Listings, $location) {
+app.controller('HomeController', ['$scope', '$resource', '$location', 'Listings', 'InfoService',
+    function ($scope, $resource, $location, Listings, InfoService) {
 
         window.scrollTo(0, 0);
         $('.selectpicker').selectpicker();
         $scope.loading = true;
+
+        $scope.info = InfoService.getWebsiteInfo();
 
         $scope.prices = 40;
         $scope.rooms = 4;
@@ -65,13 +67,13 @@ app.controller('HomeController', ['$scope', '$resource', 'Listings', '$location'
             types: "['Single Family']"
         };
 
-        $scope.getNumber = function (num) {
-            return new Array(num);
-        };
-
         $scope.listings = Listings.query(function () {
             $scope.loading = false;
         });
+
+        $scope.getNumber = function (num) {
+            return new Array(num);
+        };
 
         $scope.isAdminPortal = function () {
             return $location.url().indexOf('admin') >= 0;
@@ -119,8 +121,12 @@ app.controller('AgentDetailController', ['$scope', '$modal', '$routeParams', 'Re
     }
 ]);
 
-app.controller('AboutController', ['$scope',
-    function ($scope, Realtors) {
+app.controller('AboutController', ['$scope', '$sce', 'InfoService',
+    function ($scope, $sce, InfoService) {
         window.scrollTo(0, 0);
+
+        $scope.info = InfoService.getWebsiteInfo(function () {
+            $scope.info.about_us = $sce.trustAsHtml($scope.info.about_us);
+        });
     }
 ]);

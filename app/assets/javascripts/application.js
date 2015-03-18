@@ -15,6 +15,8 @@
 //= require bootstrap-sass-official
 //= require underscore
 //= require angular/angular
+//= require tinymce
+//= require angular-ui-tinymce
 //= require angular-resource/angular-resource
 //= require angular-route/angular-route
 //= require angular-bootstrap
@@ -23,4 +25,5 @@
 //= require ng-file-upload-shim
 //= require ngAutocomplete
 //= require bootstrap-select
+//= require tinymce-jquery
 //= require_tree .

@@ -13,6 +13,7 @@
     "bootstrap-select": "latest",
     "font-awesome": "latest",
     "angular-mocks": "latest",
-    "bootstrap-sass": "latest"
+    "bootstrap-sass": "latest",
+    "angular-ui-tinymce": "latest"
   }
 }

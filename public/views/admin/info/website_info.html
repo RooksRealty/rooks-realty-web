@@ -1,0 +1,54 @@
+<div class="container">
+	<div class="col-md-offset-2 col-md-8">
+		<alert ng-show="showAlert" ng-model="alert" type="{{alert.type}}">{{alert.msg}}</alert>
+
+		<form name="infoForm" novalidate>
+		  <div class="form-group col-md-12">
+		    <label for="address">Company Address *</label>
+		    <input type="text" class="form-control" id="address" 
+		    	ng-class="{'has-error': infoForm.address.$touched && infoForm.address.$invalid}"
+		    	ng-model='info.address' required>
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="city">City *</label>
+		    <input type="text" class="form-control" id="city"
+		    	ng-class="{'has-error': infoForm.city.$touched && infoForm.city.$invalid}"
+		    	ng-model='info.city' required>
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="state">State *</label>
+		    <input type="text" class="form-control" id="state"
+		    	ng-class="{'has-error': infoForm.state.$touched && infoForm.state.$invalid}" 
+		    	ng-model='info.state' required>
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="zip">Zip Code *</label>
+		    <input type="text" class="form-control" id="zip"
+		    	ng-class="{'has-error': infoForm.zip.$touched && infoForm.zip.$invalid}" 
+		    	ng-model='info.zip_code' required>
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="phone_number">Company Phone Number *</label>
+		    <input type="phone" class="form-control" id="phone_number"
+		    	ng-class="{'has-error': infoForm.phone_number.$touched && infoForm.phone_number.$invalid}" 
+		    	ng-model="info.phone_number"
+		    	ng-change="formatPhoneNumber(info.phone_number, 'phone_number')" required>
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="fax">Company Fax Number</label>
+		    <input type="phone" class="form-control" id="fax" ng-model="info.fax"
+		    	ng-change="formatPhoneNumber(info.fax, 'fax')">
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="email">Company Email Address</label>
+		    <input type="email" class="form-control" id="email" ng-model="info.email">
+		  </div>
+		  
+		  <div class="form-group  col-md-12">
+		    <label for="about">About Us *</label>
+		    <textarea id="tinymce" ui-tinymce ng-model="info.about_us" rows="10"></textarea>
+		  </div>
+		  <button type="submit" class="btn btn-primary" ng-click="update()">Update</button>
+		</form>
+	</div>
+</div>

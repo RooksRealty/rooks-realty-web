@@ -13,6 +13,7 @@ gem 'nokogiri'
 gem 'paperclip'
 gem 'devise'
 gem 'app_constants'
+gem 'tinymce-rails'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'
