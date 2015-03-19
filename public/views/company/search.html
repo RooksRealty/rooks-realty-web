@@ -85,7 +85,7 @@
                 <span ng-show="query.types === ''">for <strong>All</strong> types</span>
             </div>
             <div class="panel-body hidden-sm hidden-xs">
-                <form class="form-inline">
+                <form class="form-inline" ng-hide="displayAs === 'map'">
                     <div class="form-group col-md-6">
                         <label class="control-label" for="sort-by">Sort by</label>
                         <select class="form-control" id="sort-by" ng-model="orderByField">
@@ -107,8 +107,8 @@
                                 ng-class="{active:displayAs === 'list'}">
                             <i class="fa fa-list"></i> List
                         </button>
-                        <button type="button" class="btn btn-default hidden"
-                                ng-click="displayAs = 'map'"
+                        <button type="button" class="btn btn-default"
+                                ng-click="showMap()"
                                 ng-class="{active:displayAs === 'map'}">
                             <i class="fa fa-map-marker"></i> Map
                         </button>
@@ -123,9 +123,10 @@
             <p>Loading...</p>
         </div>
 
+        <div ng-show="displayAs === 'map'" id="search-map"></div>
         <div ng-hide="loading" class="listing" ng-class="{'col-md-4 grid':displayAs === 'grid'}"
              ng-repeat="listing in filtered = (listings | orderBy:orderByField | searchFilter:query)">
-            <div class="panel panel-default">
+            <div class="panel panel-default" ng-class="{hidden:displayAs === 'map'}">
                 <div class="panel-body">
                     <div class='listing-image' ng-class="{'col-md-3':displayAs === 'list'}">
                         <a href="../#/listings/{{listing.id}}">

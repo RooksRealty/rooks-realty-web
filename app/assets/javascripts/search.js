@@ -1,7 +1,8 @@
-var app = angular.module('search', ['services', 'ngAutocomplete']);
+var app = angular.module('search', ['services', 'ngAutocomplete', 'angular-bootstrap-select']);
 
 app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorScroll', 'Listings',
     function ($scope, $timeout, $location, $anchorScroll, Listings) {
+        var map;
         window.scrollTo(0, 0);
 
         $scope.loading = true;
@@ -14,6 +15,7 @@ app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorS
         $scope.numPerPage = 10;
         $scope.displayAs = 'list';
         $scope.orderByField = 'mls';
+        $scope.markers = [];
 
         $scope.query = {
             min_price: 'Any',
@@ -61,8 +63,57 @@ app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorS
                 $('label[for="location"]').addClass('hidden');
             }
 
-            $('.selectpicker').selectpicker();
             // $('.search-panel').affix({ offset: { top: 0 } });
+        };
+
+        $scope.showMap = function () {
+            $scope.displayAs = 'map';
+            $scope.initializeMap();
+        };
+
+        $scope.initializeMap = function() {
+          var mapOptions = {
+            zoom: 10,
+            center: new google.maps.LatLng(34.730875, -86.594787)
+          };
+          map = new google.maps.Map(document.getElementById('search-map'), mapOptions);
+
+          for(var idx in $scope.listings) {
+              $scope.markers.push($scope.createMarker(map, $scope.listings[idx]));
+          }
+
+          google.maps.event.trigger(map,'resize');
+        };
+
+        $scope.createMarker = function (map, listing) {
+            var marker;
+            var geocoder = new google.maps.Geocoder();
+            var fullAddress = listing.address + ", " + listing.city + ", " + listing.state + " " + listing.zipcode;
+
+            geocoder.geocode( { 'address': fullAddress}, function(results, status) {
+                  if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        title: "MLS # " + listing.mls
+                    });
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: "<div class='text-center'>" +
+                            "<a href='../#/listings/" + listing.id + "'><img class='thumb' src='" + listing.avatar + "'/></a><br>" +
+                            "<span>" + listing.address + "</span><br>" +
+                            "<p><span>" + listing.bedrooms + " <i class='fa fa-bed'></i> | </span>" +
+                            "<span>" + listing.bathrooms + " <img src='assets/shower.png'/></span></p></div>"
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(map, marker);
+                    });                                   
+                }
+            });
+
+            return marker;
         };
         
         $scope.gotoResults = function() {
@@ -88,7 +139,6 @@ app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorS
             }
         });
 
-        $('.selectpicker').selectpicker();
         $scope.init();
     }
 ]);
