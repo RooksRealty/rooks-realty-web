@@ -14,23 +14,12 @@
  *= require_self
  */
 
- //= require font-awesome
-
 @import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "bootstrap-theme.min.css";
-@import "bootstrap-select/dist/css/bootstrap-select.min.css";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 @font-face {
-  font-family: "FontAwesome";
-  src: font-url('fontawesome-webfont.eot');
-  src: font-url('fontawesome-webfont.woff'),
-  font-url('fontawesome-webfont.ttf'),
-  font-url('fontawesome-webfont.svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
- @font-face {
   font-family: SourceSansPro;
   src: local('../assets/SourceSansPro-Regular'),
   font-url('../assets/SourceSansPro-Regular.ttf') format('truetype');
@@ -153,3 +142,4 @@
 }
 
 html, body, #map-canvas { height: 300px; margin: 0; padding: 0;}
+html, body, #search-map { height: 400px; margin: 0; padding: 0;}
