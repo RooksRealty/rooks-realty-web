@@ -1,8 +1,10 @@
 var app = angular.module('contact', ['ui.bootstrap']);
 
-app.controller('ContactController', ['$scope', '$location', 'EmailService',
-    function ($scope, $location, EmailService) {
+app.controller('ContactController', ['$scope', '$location', 'EmailService', 'InfoService',
+    function ($scope, $location, EmailService, InfoService) {
       window.scrollTo(0, 0);
+
+      $scope.info = InfoService.getWebsiteInfo();
 
       $scope.alerts = [
         { type: 'danger', msg: 'Something went wrong. Please try to submit again.' },

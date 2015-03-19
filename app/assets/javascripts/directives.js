@@ -2,6 +2,7 @@ var app = angular.module('directives', []);
 
 app.directive('contactInfo', function () {
     return {
+        scope: { info: '=' },
         restrict: 'E',
         templateUrl: '../views/company/shared/contactInfo.html'
     }

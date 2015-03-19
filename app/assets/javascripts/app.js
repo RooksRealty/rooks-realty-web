@@ -48,14 +48,16 @@ app.controller('NavController', ['$scope', '$location', function ($scope, $locat
     };
 }]);
 
+app.controller('FooterController', ['$scope', 'InfoService', function ($scope, InfoService) {
+    $scope.info = InfoService.getWebsiteInfo();
+}]);
+
 app.controller('HomeController', ['$scope', '$resource', '$location', 'Listings', 'InfoService',
     function ($scope, $resource, $location, Listings, InfoService) {
 
         window.scrollTo(0, 0);
         $('.selectpicker').selectpicker();
         $scope.loading = true;
-
-        $scope.info = InfoService.getWebsiteInfo();
 
         $scope.prices = 40;
         $scope.rooms = 4;

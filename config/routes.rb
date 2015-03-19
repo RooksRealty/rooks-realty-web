@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   post 'contact' => 'contact#contact'
   post 'schedule_showing' => 'contact#scheduleShowing'
   post 'incoming_mails' => 'incoming_mails#create'
-  get 'info' => 'admin#website_info'
-  put 'info' => 'admin#update_info'
+  get 'info' => 'info#website_info'
+  put 'info' => 'info#update_info'
 
   get 'admin' => 'admin#index'
   post '/listing/image/upload/:id' => 'upload#listing_image_upload'

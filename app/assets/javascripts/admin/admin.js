@@ -31,4 +31,6 @@ app.controller('NavController', ['$scope', '$location', function ($scope, $locat
 	};
 }]);
 
-
+app.controller('FooterController', ['$scope', 'InfoService', function ($scope, InfoService) {
+	$scope.info = InfoService.getWebsiteInfo();
+}]);
