@@ -11,6 +11,7 @@
     "underscore": "latest",
     "ngAutocomplete": "latest",
     "bootstrap-select": "latest",
+    "angular-bootstrap-select": "latest",
     "font-awesome": "latest",
     "angular-mocks": "latest",
     "bootstrap-sass": "latest",

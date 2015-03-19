@@ -14,6 +14,9 @@ gem 'paperclip'
 gem 'devise'
 gem 'app_constants'
 gem 'tinymce-rails'
+gem 'sass-rails'
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'
