@@ -86,7 +86,7 @@
                 <form class="form-inline" ng-hide="displayAs === 'map'">
                     <div class="form-group col-md-6">
                         <label class="control-label" for="sort-by">Sort by</label>
-                        <select class="form-control" id="sort-by" ng-model="orderByField">
+                        <select class="form-control" id="sort-by" ng-model="orderBy">
                             <option ng-repeat="type in sortTypes" value="{{type.value}}">{{type.label}}</option>
                         </select>
                     </div>
@@ -123,45 +123,47 @@
 
         <div ng-show="displayAs === 'map'" id="search-map"></div>
 
-        <div ng-hide="loading" class="listing" ng-class="{'col-md-4 grid':displayAs === 'grid'}"
-             ng-repeat="listing in filtered = (listings | orderBy:orderByField | searchFilter:query)">
-            <div class="panel panel-default" ng-class="{hidden:displayAs === 'map'}">
-                <div class="panel-body">
-                    <div class='listing-image' ng-class="{'col-md-3':displayAs === 'list'}">
-                        <a href="../#/listings/{{listing.id}}">
-                            <img class="thumb" ng-src="{{listing.avatar}}"
-                                 ng-class="{'text-center':displayAs === 'grid'}"/>
-                        </a>
-                    </div>
+        <div class="results" ng-hide="loading || displayAs === 'map'">
+            <div class="listing" ng-class="{'col-md-4 grid':displayAs === 'grid'}"
+                 ng-repeat="listing in filtered = (listings | orderBy:orderByField:reverseSort | searchFilter:query)">
+                <div class="panel panel-default" ng-class="{hidden:displayAs === 'map'}">
+                    <div class="panel-body">
+                        <div class='listing-image' ng-class="{'col-md-3':displayAs === 'list'}">
+                            <a href="../#/listings/{{listing.id}}">
+                                <img class="thumb" ng-src="{{listing.avatar}}"
+                                     ng-class="{'text-center':displayAs === 'grid'}"/>
+                            </a>
+                        </div>
 
-                    <div ng-class="{'col-md-9':displayAs === 'list'}">
-						<span class="address-wrapper">
-                            <span class="address">
-                                {{listing.address}}<span ng-hide="displayAs === 'grid'">,</span>
-                                <br ng-show="displayAs === 'grid'">
-                                {{listing.city}}, {{listing.state}} {{listing.zipcode}}<br>
-                            </span>
-							<span class="hidden-sm hidden-xs mls">MLS # {{listing.mls}}</span>
-						</span>
-                        <span class="pull-right price">{{listing.price | currency:"$":0}}</span>
+                        <div ng-class="{'col-md-9':displayAs === 'list'}">
+    						<span class="address-wrapper">
+                                <span class="address">
+                                    {{listing.address}}<span ng-hide="displayAs === 'grid'">,</span>
+                                    <br ng-show="displayAs === 'grid'">
+                                    {{listing.city}}, {{listing.state}} {{listing.zipcode}}<br>
+                                </span>
+    							<span class="hidden-sm hidden-xs mls">MLS # {{listing.mls}}</span>
+    						</span>
+                            <span class="pull-right price">{{listing.price | currency:"$":0}}</span>
 
-                        <div class="description clear hidden-sm hidden-xs" ng-hide="displayAs === 'grid'">
-                            {{listing.long_description}}
+                            <div class="description clear hidden-sm hidden-xs" ng-hide="displayAs === 'grid'">
+                                {{listing.long_description}}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-footer">
-                    <span ng-class='{empty:!listing.bedrooms}'>{{listing.bedrooms}} <i class="fa fa-bed"></i> | </span>
-                    <span ng-class='{empty:!listing.bathrooms}'>{{listing.bathrooms}} <img
-                            src='assets/shower.png'/></span>
-                    <span ng-class='{empty:lisitng.sqft}' ng-show="listing.sqft && displayAs === 'list'"> | {{listing.sqft | number}} Sq Ft</span>
-                    <span ng-class="{empty:listing.acres == 0}" ng-show="listing.acres && displayAs === 'list'"> | {{listing.acres | number}} Acres</span>
+                    <div class="panel-footer">
+                        <span ng-class='{empty:!listing.bedrooms}'>{{listing.bedrooms}} <i class="fa fa-bed"></i> | </span>
+                        <span ng-class='{empty:!listing.bathrooms}'>{{listing.bathrooms}} <img
+                                src='assets/shower.png'/></span>
+                        <span ng-class='{empty:lisitng.sqft}' ng-show="listing.sqft && displayAs === 'list'"> | {{listing.sqft | number}} Sq Ft</span>
+                        <span ng-class="{empty:listing.acres == 0}" ng-show="listing.acres && displayAs === 'list'"> | {{listing.acres | number}} Acres</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="text-center clear hidden">
-            <pagination total-items="listings.length" ng-model="currentPage"></pagination>
+            <div class="text-center clear hidden">
+                <pagination total-items="listings.length" ng-model="currentPage"></pagination>
+            </div>
         </div>
 
     </div>

@@ -13,7 +13,7 @@ app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorS
         $scope.currentPage = 1;
         $scope.numPerPage = 10;
         $scope.displayAs = 'list';
-        $scope.orderByField = 'mls';
+        $scope.orderBy = 'mls';
         $scope.markers = [];
 
         $scope.query = {
@@ -30,12 +30,22 @@ app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorS
         $scope.sortTypes = [
             { label: 'MLS', value: 'mls' },
             { label: 'Price (low-high)', value: 'price' },
-            { label: 'Price (high-low)', value: 'price' },
+            { label: 'Price (high-low)', value: '!price' },
             { label: 'Acres', value: 'acres' },
             { label: 'Baths', value: 'bathrooms' },
             { label: 'Beds', value: 'bedrooms' }
         ];
         $scope.sortBy = $scope.sortTypes[0];
+
+        $scope.$watch('orderBy', function () {
+            if($scope.orderBy === '!price') {
+                $scope.orderByField = 'price';
+                $scope.reverseSort = true;
+            } else {
+                $scope.orderByField = $scope.orderBy;
+                $scope.reverseSort = false;
+            }
+        });
 
         $scope.init = function () {
             $scope.listings = Listings.query(function () {

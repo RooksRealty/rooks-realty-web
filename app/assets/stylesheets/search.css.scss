@@ -71,16 +71,25 @@ $lines-to-show: 3;
   }
 }
 
+.results {
+  height: 400px;
+  overflow-y: scroll;
+}
+
 .angular-google-map-container {
   height: 400px;
 }
 
 @media (max-width: 765px) {
 
-  .listing {
-    .listing-image {
-      img {
-        width: 100%;
+  .results {
+    height: 100%;
+
+    .listing {
+      .listing-image {
+        img {
+          width: 100%;
+        }
       }
     }
   }
