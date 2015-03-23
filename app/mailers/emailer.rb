@@ -1,5 +1,5 @@
 class Emailer < ActionMailer::Base
-  default from: 'info@rooks-realty.com'
+  default from: 'do-not-reply@rooks-realty.com'
 
   def submit_contact_message(contact)
     @contact = contact
