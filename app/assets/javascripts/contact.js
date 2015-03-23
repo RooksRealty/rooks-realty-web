@@ -4,7 +4,22 @@ app.controller('ContactController', ['$scope', '$location', 'EmailService', 'Inf
     function ($scope, $location, EmailService, InfoService) {
       window.scrollTo(0, 0);
 
-      $scope.info = InfoService.getWebsiteInfo();
+      $scope.info = InfoService.getWebsiteInfo(function () {
+        $scope.info.fax = $scope.formatPhoneNumber($scope.info.fax);
+        $scope.info.phone_number = $scope.formatPhoneNumber($scope.info.phone_number);
+      });
+      $scope.formatPhoneNumber = function(phoneNumber) {
+          if(phoneNumber) {
+              var numbers = phoneNumber.replace(/\D/g, ''),
+                  char = {0:'(',3:') ',6:'-'};
+              phoneNumber = '';
+              for (var i = 0; i < numbers.length; i++) {
+                  phoneNumber += (char[i]||'') + numbers[i];
+              }
+
+              return phoneNumber;
+          }
+      };
 
       $scope.alerts = [
         { type: 'danger', msg: 'Something went wrong. Please try to submit again.' },
