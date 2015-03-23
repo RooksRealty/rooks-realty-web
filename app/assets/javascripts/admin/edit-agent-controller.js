@@ -5,6 +5,7 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 		$scope.realtor = agent;
 		$scope.showAlert = false;
 		$scope.alert = { msg: '' };
+		$scope.helpers = Utilities.helpers;
 
 		$scope.update = function () {
 			if($scope.agentForm.$valid) {
@@ -63,16 +64,8 @@ app.controller('EditAgentController', ['$scope', '$modalInstance', '$upload', 'a
 	      });
 		};
 
-		$scope.formatPhoneNumber = function(phoneNumber) {
-			if(phoneNumber) {
-				var numbers = phoneNumber.replace(/\D/g, ''),
-			        char = {0:'(',3:') ',6:'-'};
-			    phoneNumber = '';
-			    for (var i = 0; i < numbers.length; i++) {
-			        phoneNumber += (char[i]||'') + numbers[i];
-			    }
-			    $scope.realtor.phone_number = phoneNumber;
-			}
+		$scope.format = function() {
+			$scope.realtor.phone_number = $scope.helpers.formatPhoneNumber($scope.realtor.phone_number);
 		};
 	}
 ]);

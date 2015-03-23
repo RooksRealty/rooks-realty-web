@@ -68,3 +68,9 @@ app.factory('ShowingService', ['$resource', function ($resource) {
     scheduleShowing: { method: 'POST', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
   });
 }]);
+
+app.factory('QuestionService', ['$resource', function ($resource) {
+  return $resource('/property_question', {}, {
+    askQuestion: { method: 'POST', headers: { 'Authorization' : 'Token token="b9dee854a6f62cd3589c0c76569d2883"' } }
+  });
+}]);

@@ -6,6 +6,7 @@ app.controller('ScheduleShowingController', ['$scope', '$modalInstance', 'listin
 		$scope.showAlert = false;
 		$scope.showOptions = false;
 		$scope.alert = { msg: '' };
+		$scope.helpers = Utilities.helpers;
 
 		$scope.cancel = function () {
 			$modalInstance.dismiss()
@@ -25,16 +26,8 @@ app.controller('ScheduleShowingController', ['$scope', '$modalInstance', 'listin
 			}
 		};
 
-		$scope.formatPhoneNumber = function(phoneNumber) {
-			if(phoneNumber) {
-				var numbers = phoneNumber.replace(/\D/g, ''),
-			        char = {0:'(',3:') ',6:'-'};
-			    phoneNumber = '';
-			    for (var i = 0; i < numbers.length; i++) {
-			        phoneNumber += (char[i]||'') + numbers[i];
-			    }
-			    $scope.showing.phone_number = phoneNumber;
-			}
+		$scope.format = function() {
+			$scope.showing.phone_number = $scope.helpers.formatPhoneNumber($scope.showing.phone_number);
 		};
 	}
 

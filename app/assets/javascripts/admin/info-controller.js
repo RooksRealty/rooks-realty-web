@@ -4,11 +4,16 @@ app.controller('InfoController', ['$scope', 'InfoService',
 	function ($scope, InfoService) {
 		$scope.showAlert = false;
 		$scope.alert = { msg: '', type: '' };
+		$scope.helpers = Utilities.helpers;
 
 		$scope.info = InfoService.getWebsiteInfo(function () {
-			$scope.formatPhoneNumber($scope.info.phone_number, 'phone_number');
-			$scope.formatPhoneNumber($scope.info.fax, 'fax'); 
+			$scope.info.phone_number = $scope.helpers.formatPhoneNumber($scope.info.phone_number);
+			$scope.info.fax = $scope.helpers.formatPhoneNumber($scope.info.fax); 
 		});
+
+		$scope.format = function (field) {
+			$scope.info[field] = $scope.helpers.formatPhoneNumber($scope.info[field]);
+		};
 
 		$scope.update = function () {
 			if($scope.infoForm.$valid) {
@@ -25,18 +30,6 @@ app.controller('InfoController', ['$scope', 'InfoService',
 				$scope.alert.type = 'danger';
 				$scope.alert.msg = 'This form is not valid. Please fill in the required fields.';
 				$scope.showAlert = true;
-			}
-		};
-
-		$scope.formatPhoneNumber = function(phoneNumber, property) {
-			if(phoneNumber) {
-				var numbers = phoneNumber.replace(/\D/g, ''),
-			        char = {0:'(',3:') ',6:'-'};
-			    phoneNumber = '';
-			    for (var i = 0; i < numbers.length; i++) {
-			        phoneNumber += (char[i]||'') + numbers[i];
-			    }
-			    $scope.info[property] = phoneNumber;
 			}
 		};
 

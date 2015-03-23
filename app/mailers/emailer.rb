@@ -11,4 +11,9 @@ class Emailer < ActionMailer::Base
   	@details = showing_details
   	mail(:to => @details[:realtor].email, :subject => 'Someone wants to schedule a showing!')
   end
+
+  def property_question(details)
+    @details = details
+    mail(:to => @details[:realtor].email, :subject => 'Property Question')
+  end
 end

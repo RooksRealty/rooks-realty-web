@@ -32,12 +32,12 @@
 		    <input type="phone" class="form-control" id="phone_number"
 		    	ng-class="{'has-error': infoForm.phone_number.$touched && infoForm.phone_number.$invalid}" 
 		    	ng-model="info.phone_number"
-		    	ng-change="formatPhoneNumber(info.phone_number, 'phone_number')" required>
+		    	ng-change="format('phone_number')" required>
 		  </div>
 		  <div class="form-group col-md-4">
 		    <label for="fax">Company Fax Number</label>
 		    <input type="phone" class="form-control" id="fax" ng-model="info.fax"
-		    	ng-change="formatPhoneNumber(info.fax, 'fax')">
+		    	ng-change="format('fax')">
 		  </div>
 		  <div class="form-group col-md-4">
 		    <label for="email">Company Email Address</label>

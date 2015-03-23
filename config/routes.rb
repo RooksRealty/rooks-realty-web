@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   post 'contact' => 'contact#contact'
   post 'schedule_showing' => 'contact#scheduleShowing'
+  post 'property_question' => 'contact#propertyQuestion'
   post 'incoming_mails' => 'incoming_mails#create'
   get 'info' => 'info#website_info'
   put 'info' => 'info#update_info'

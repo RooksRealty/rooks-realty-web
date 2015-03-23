@@ -1,34 +1,73 @@
 <section>
 <div class="listing-detail col-md-offset-2 col-md-8">
 	<div class='row'>
-		<div class='col-md-6'>
-			<img class="full text-center" ng-src="{{listing.avatar}}"/>
+		<div class='col-md-8'>
+			<img class="listing-image text-center" ng-src="{{listing.avatar}}"/>
 			<button ng-click="scheduleShowing()" class="btn btn-info">Schedule a Showing</button>
 		</div>
-
-		<div class="details col-md-offset-1 col-md-5">
-			MLS #: {{listing.mls}}<br>
-			Agent: <a href="#/agents/{{listing.realtor.id}}">{{listing.realtor.name}}</a><br>
+		<div class='col-md-4 hidden-sm hidden-xs'>
+			<h4>Ask the Agent a Question</h3>
 			
-			<address>
-				{{listing.address}}<br>
-				{{listing. city}}, {{listing.state}} {{listing.zipcode}}
-			</address>
+			<form class="form-horizontal" name="questionForm" novalidate>
+				<alert ng-show="showAlert" ng-model="alert" type="{{alert.type}}">{{alert.msg}}</alert>
+				<div class="form-group">
+					<input class="form-control" type="text" ng-model="question.email" placeholder="Enter your email">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" ng-model="question.phone_number" ng-change="format()" placeholder="Enter your cell phone">
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" ng-model="question.question" rows="5" required></textarea>
+				</div>
+				<button class="btn btn-primary btn-block" ng-click="askPropertyQuestion()">Ask a Property Question</button>
+			</form>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-8 details">
+			<h3>
+				{{listing.price | currency:"$":0 }}<br>
+				{{listing.address}}, {{listing. city}}, {{listing.state}} {{listing.zipcode}}
+			</h3>
 
-			<div>
-				Acres: {{listing.acres | number}}<br>
-				Sqft: {{listing.sqft}}<br>
-				Bedrooms: {{listing.bedrooms}}<br>
-				Bathrooms: {{listing.bathrooms}}<br>
-				Garage: {{listing.garages}}<br>
-				Type: {{listing.build_type}}<br>
-				Year Built: {{listing.year_built}}<br>
+			<strong>MLS #:</strong> {{listing.mls}}
+			<strong>Type:</strong> {{listing.build_type}}
+			<strong>Garage:</strong> {{listing.garages === 0 ? '--' : listing.garages}}
+			<strong>Agent:</strong> <a href="#/agents/{{listing.realtor.id}}">{{listing.realtor.name}}</a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="details col-md-8">
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td>Beds</td>
+							<td>Baths</td>
+							<td>Sqft</td>
+							<td>Acres</td>
+							<td>Year Built</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{listing.bedrooms}}</td>
+							<td>{{listing.bathrooms}}</td>
+							<td>{{listing.sqft}}</td>
+							<td>{{listing.acres | number}}</td>
+							<td>{{listing.year_built ? listing.year_built : '--'}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
+
 	<div class="row">
-		<div class="col-md-12">
-			<h3>{{listing.price | currency:"$":0 }}</h3>
+		<div class="col-md-8">
+			{{listing.long_description}}
 		</div>
 	</div>
 

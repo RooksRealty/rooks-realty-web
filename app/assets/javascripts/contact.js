@@ -3,23 +3,12 @@ var app = angular.module('contact', ['ui.bootstrap']);
 app.controller('ContactController', ['$scope', '$location', 'EmailService', 'InfoService',
     function ($scope, $location, EmailService, InfoService) {
       window.scrollTo(0, 0);
+      $scope.helpers = Utilities.helpers;
 
       $scope.info = InfoService.getWebsiteInfo(function () {
-        $scope.info.fax = $scope.formatPhoneNumber($scope.info.fax);
-        $scope.info.phone_number = $scope.formatPhoneNumber($scope.info.phone_number);
+        $scope.info.fax = $scope.helpers.formatPhoneNumber($scope.info.fax);
+        $scope.info.phone_number = $scope.helpers.formatPhoneNumber($scope.info.phone_number);
       });
-      $scope.formatPhoneNumber = function(phoneNumber) {
-          if(phoneNumber) {
-              var numbers = phoneNumber.replace(/\D/g, ''),
-                  char = {0:'(',3:') ',6:'-'};
-              phoneNumber = '';
-              for (var i = 0; i < numbers.length; i++) {
-                  phoneNumber += (char[i]||'') + numbers[i];
-              }
-
-              return phoneNumber;
-          }
-      };
 
       $scope.alerts = [
         { type: 'danger', msg: 'Something went wrong. Please try to submit again.' },

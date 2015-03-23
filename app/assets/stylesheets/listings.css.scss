@@ -68,6 +68,23 @@
   }
 }
 
+.listing-detail {
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .details {
+    strong {
+      margin-left: 5px;
+    }
+
+    margin-bottom: 10px;
+  }
+}
+
+html, body, #map-canvas { height: 300px; margin: 10px 0 0 0; padding: 0;}
+
 @media (max-width: 765px) {
   .listings {
     overflow-x: auto;
