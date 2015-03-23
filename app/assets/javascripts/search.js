@@ -2,7 +2,6 @@ var app = angular.module('search', ['services', 'ngAutocomplete', 'angular-boots
 
 app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorScroll', 'Listings',
     function ($scope, $timeout, $location, $anchorScroll, Listings) {
-        var map;
         window.scrollTo(0, 0);
 
         $scope.loading = true;
@@ -45,6 +44,12 @@ app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorS
                 var end = begin + $scope.numPerPage;
 
                 $scope.filteredListings = $scope.listings.slice(begin, end);
+
+                for(var idx in $scope.listings) {
+                  $scope.createMarker($scope.listings[idx]);
+                }
+
+                console.log($scope.markers);
             });
 
             if(window.google) {
@@ -66,37 +71,41 @@ app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorS
             // $('.search-panel').affix({ offset: { top: 0 } });
         };
 
-        $scope.showMap = function () {
-            $scope.displayAs = 'map';
-            $scope.initializeMap();
-        };
+       $scope.showMap = function () {
+           $scope.displayAs = 'map';
+           $scope.initializeMap();
+       };
 
-        $scope.initializeMap = function() {
-          var mapOptions = {
-            zoom: 10,
-            center: new google.maps.LatLng(34.730875, -86.594787)
-          };
-          map = new google.maps.Map(document.getElementById('search-map'), mapOptions);
+       $scope.hideMap = function () {
+            console.log('hiding map!');
+            $('#search-map').empty();
+       };
 
-          for(var idx in $scope.listings) {
-              $scope.markers.push($scope.createMarker(map, $scope.listings[idx]));
-          }
+       $scope.initializeMap = function() {
+         var mapOptions = {
+           zoom: 10,
+           center: new google.maps.LatLng(34.738114, -86.593832)
+         };
+         map = new google.maps.Map(document.getElementById('search-map'), mapOptions);
 
-          google.maps.event.trigger(map,'resize');
-        };
+         for(var idx in $scope.filtered) {
+             $scope.createMarker(map, $scope.listings[idx]);
+         }
+
+       };
 
         $scope.createMarker = function (map, listing) {
             var marker;
             var geocoder = new google.maps.Geocoder();
             var fullAddress = listing.address + ", " + listing.city + ", " + listing.state + " " + listing.zipcode;
 
-            geocoder.geocode( { 'address': fullAddress}, function(results, status) {
+            geocoder.geocode( { 'address': fullAddress}, _.bind(function(results, status) {
                   if (status == google.maps.GeocoderStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
-                    marker = new google.maps.Marker({
-                        map: map,
+                    var marker = new google.maps.Marker({
+                        id: listing.id, 
                         position: results[0].geometry.location,
-                        title: "MLS # " + listing.mls
+                        title: "MLS # " + listing.mls,
+                        map: map
                     });
 
                     var infowindow = new google.maps.InfoWindow({
@@ -109,13 +118,20 @@ app.controller('SearchController', ['$scope', '$timeout', '$location', '$anchorS
 
                     google.maps.event.addListener(marker, 'click', function() {
                         infowindow.open(map, marker);
-                    });                                   
-                }
-            });
+                    });
 
-            return marker;
+                    $scope.markers.push(marker);
+                }
+            }, listing));
         };
-        
+
+       $scope.updateMap = function() {
+           if($scope.displayAs === 'map') {
+               map = null;
+               $scope.initializeMap();
+           }
+       };
+
         $scope.gotoResults = function() {
           $location.hash('results');
           $anchorScroll();

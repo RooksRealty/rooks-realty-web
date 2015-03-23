@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sass-official
+//= require bootstrap-sprockets
 //= require underscore
 //= require angular/angular
 //= require tinymce
@@ -25,5 +26,6 @@
 //= require ng-file-upload-shim
 //= require ngAutocomplete
 //= require bootstrap-select
+//= require angular-bootstrap-select
 //= require tinymce-jquery
 //= require_tree .
