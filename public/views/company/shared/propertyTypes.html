@@ -14,5 +14,10 @@
 <script>
     $(function () {
         $('.selectpicker').selectpicker();
+
+        $('.selectpicker').click(function () {
+            $(this).trigger ({ type: 'keypress' });
+        });
+        
     });
 </script>
