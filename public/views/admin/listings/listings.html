@@ -159,14 +159,14 @@
 				</td>
 				<td>{{listing.address}}<br>{{listing. city}}, {{listing.state}} {{listing.zipcode}}</td>
 				<td>{{listing.price | currency:"$":0 }}</td>
-				<td ng-class="{empty:!listing.acres}">{{listing.acres | number}}</td>
-				<td ng-class="{empty:!listing.bedrooms}">{{listing.bedrooms}}</td>
-				<td ng-class="{empty:!listing.bathrooms}">{{listing.bathrooms}}</td>
-				<td ng-class="{empty:!listing.garages}">{{listing.garages}}</td>
-				<td ng-class="{empty:!listing.sqft}">{{listing.sqft}}</td>
+				<td ng-class="{empty:!listing.acres}"><span ng-show="listing.acres">{{listing.acres | number}}</span></td>
+				<td ng-class="{empty:!listing.bedrooms}"><span ng-show="listing.bedrooms">{{listing.bedrooms}}</span></td>
+				<td ng-class="{empty:!listing.bathrooms}"><span ng-show="listing.bathrooms">{{listing.bathrooms}}</span></td>
+				<td ng-class="{empty:!listing.garages}"><span ng-show="listing.garages">{{listing.garages}}</span></td>
+				<td ng-class="{empty:!listing.sqft}"><span ng-show="listing.sqft">{{listing.sqft}}</span></td>
 				<td>{{listing.realtor.name}}</td>
-				<td ng-class="{empty:!listing.year_built}">{{listing.year_built}}</td>
-				<td ng-class="{empty:!listing.build_type}">{{listing.build_type}}</td>
+				<td ng-class="{empty:!listing.year_built}"><span ng-show="listing.year_built">{{listing.year_built}}</span></td>
+				<td ng-class="{empty:!listing.build_type}"><span ng-show="listing.build_type">{{listing.build_type}}</span></td>
 				<td>
 					<button class="btn btn-info btn-xs" ng-click="openModal(listing)"><i class="fa fa-edit"></i></button>
 					<button class="btn btn-danger btn-xs" ng-click="removeListing(listing.id)"><i class="fa fa-trash"></i></button>
